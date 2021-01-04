@@ -33,12 +33,7 @@ onload = () => {
 </tbody>
 </table>
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
-<p>The natural order is therefore</p>
-<pre class="mermaid"><code>graph LR;
-A[setup] --&gt;B(weswgs.sh);
-    B --&gt; C{2-parts};
-    C --&gt;|spa.sh| D[aggregate/upload];
-    C --&gt;|rva.sh| E[aggregate/upload];</code></pre>
+The natural order is therefore
 <div class="mermaid">
 <p>graph LR; A[set up links] –&gt;B(weswgs.sh); B –&gt; C{2-parts}; C –&gt;|spa.sh| D[aggregate/upload]; C –&gt;|rva.sh| E[aggregate/upload];</p>
 </div>
