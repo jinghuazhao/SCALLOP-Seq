@@ -1,22 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
-<script>mermaid.initialize({
-  startOnLoad: false;
-  flowchart:{
-     htmlLabels: false
-     useMaxWidth: true
-  }
-});</script>
-<script>
-let graphStr = `graph LR;
-A[setup] -->B(weswgs.sh);
-    B --> C{2-parts};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload]`;
-onload = () => {
-  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
-}
-</script>
-
 ## Programs
 
 | Filename  | Description           |
@@ -35,6 +16,8 @@ A[setup] -->B(weswgs.sh);
     C -->|spa.sh| D[aggregate/upload];
     C -->|rva.sh| E[aggregate/upload];
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
+<script>mermaid.initialize({startOnLoad: false});</script>
 noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
 
 ## Contacts
