@@ -84,23 +84,14 @@ function vcf2gds()
   cd work
   for weswgs in wes wgs
   do
-  export weswgs=${weswgs}
-  for i in {{1..22},X,Y}
-  do
+    export weswgs=${weswgs}
+    for i in {{1..22},X,Y}
+    do
       export i=${i}
-      R --no-save <<\ \ \ \ \ \ END
-        weswgs <- Sys.getenv("weswgs")
-        chr <- paste0("chr",Sys.getenv("i"))
-        vcffile <- paste(weswgs,paste0(chr,".vcf.gz"),sep="-")
-        gdsfile <- paste(weswgs,paste0(chr,".gds"),sep="-")
-# Only SNPs
-#       SNPRelate::snpgdsVCF2GDS(vcffile, gdsfile)
-# the latest
-        SeqArray::seqVCF2GDS(vcffile, gdsfile, storage.option="ZIP_RA")
-      END
-# inside singularity?
+      R --no-save ${SEQ}/rva.R 2>&1 | tee ${SEQ}/rva.log
+  # inside singularity?
 #     ${STEP2} VCF2GDS ${weswgs}-chr${i}.vcf.gz ${weswgs}-chr${i}.gds 10
-  done
+    done
   done
   cd -
 }
