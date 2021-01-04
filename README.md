@@ -1,10 +1,10 @@
 ## Programs
 
-| Filename  | Description           |
-| --------- | --------------------- |
-| weswgs.sh | WES/WGS preprocessing |
-| rva.sh    | Rare-variant analysis |
-| spa.sh    | Single-point analysis |
+| Sequence | Filename  | Description           |
+| ---------|---------- | --------------------- |
+| 1        | weswgs.sh | WES/WGS preprocessing |
+| 2.1      | rva.sh    | Rare-variant analysis |
+| 2.2      | spa.sh    | Single-point analysis |
 
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.
 
@@ -20,10 +20,10 @@ A[setup] -->B(weswgs.sh);
 <script>mermaid.initialize({startOnLoad:false});</script>
 <script>
 let graphStr = `graph LR;
-A[setup] -->B(weswgs.sh);
-    B --> C{2-parts};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload]`;
+A[0] -->B(1);
+    B --> C{2};
+    C -->|2.1| D[done];
+    C -->|2.2| E[done]`;
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
