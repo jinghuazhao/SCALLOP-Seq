@@ -1,5 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
-<script>mermaid.initialize({startOnLoad:false});</script>
+<script>mermaid.initialize({startOnLoad:true});</script>
 
 ## Programs
 
