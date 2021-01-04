@@ -23,16 +23,18 @@ idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and re
 The natural order is therefore
 ```mermaid
 graph LR;
-A[set up links] -->B(weswgs.sh);
+A[setup] -->B(weswgs.sh);
     B --> C{2-parts};
     C -->|spa.sh| D[aggregate/upload];
     C -->|rva.sh| E[aggregate/upload];
 ```
-<div class="mermaid"><code>graph LR;
+<div class="mermaid">
+graph LR;
 A[set up links] -->B(weswgs.sh);
     B --> C{2-parts};
     C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload];</code></div>
+    C -->|rva.sh| E[aggregate/upload];
+</div>
 noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
 
 ## Contacts
