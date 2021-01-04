@@ -35,12 +35,12 @@ onload = () => {
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
 <p>The natural order is therefore</p>
 <pre class="mermaid"><code>graph LR;
-A[set up links] --&gt;B(weswgs.sh);
+A[setup] --&gt;B(weswgs.sh);
     B --&gt; C{2-parts};
     C --&gt;|spa.sh| D[aggregate/upload];
     C --&gt;|rva.sh| E[aggregate/upload];</code></pre>
 <div class="mermaid">
-<code>graph LR; A[set up links] –&gt;B(weswgs.sh); B –&gt; C{2-parts}; C –&gt;|spa.sh| D[aggregate/upload]; C –&gt;|rva.sh| E[aggregate/upload];</code>
+<p>graph LR; A[set up links] –&gt;B(weswgs.sh); B –&gt; C{2-parts}; C –&gt;|spa.sh| D[aggregate/upload]; C –&gt;|rva.sh| E[aggregate/upload];</p>
 </div>
 <p>noting in particular that sbatch implicates the –wait option as the succeeding steps would require its full results.</p>
 <h2 id="contacts">Contacts</h2>
