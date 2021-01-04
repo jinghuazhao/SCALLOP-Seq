@@ -35,6 +35,8 @@ noting in particular that sbatch implicates the --wait option as the succeeding 
 * http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/
 * http://www.columbia.edu/~ii2135/Eigen_functions_112015.R
 
+---
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
 <script>mermaid.initialize({startOnLoad:false});</script>
 <script>
