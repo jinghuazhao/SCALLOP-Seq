@@ -11,10 +11,10 @@ idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and re
 The natural order is therefore (see diagram below)
 <div class="mermaid">
 graph LR;
-A[setup] -->B(weswgs.sh);
-    B --> C{2-parts};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload];
+A[setup] -->B(1);
+    B --> C{2};
+    C -->|2,1| D[done];
+    C -->|2.2| E[done];
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
 <script>mermaid.initialize({startOnLoad:false});</script>
@@ -22,8 +22,8 @@ A[setup] -->B(weswgs.sh);
 let graphStr = `graph LR;
 A[0] -->B(1);
     B --> C{2};
-    C -->|2.1 | D[done ];
-    C -->|2.2 | E[done ]`;
+    C -->|2.1~| D[done~];
+    C -->|2.2~| E[done~]`;
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
