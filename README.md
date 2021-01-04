@@ -23,7 +23,7 @@ idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and re
 The natural order is therefore
 <div class="mermaid">
 graph LR;
-A[set up links] -->B(weswgs.sh);
+A[setup] -->B(weswgs.sh);
     B --> C{2-parts};
     C -->|spa.sh| D[aggregate/upload];
     C -->|rva.sh| E[aggregate/upload];
