@@ -12,13 +12,6 @@
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.
 
 The natural order is therefore (see diagram below)
-<div class="mermaid">
-graph LR;
-A[setup] -->B(1);
-    B --> C{2};
-    C -->|2,1| D[done];
-    C -->|2.2| E[done];
-</div>
 <script>
 let graphStr = `graph LR;
     A[0] -->B(1);
@@ -29,6 +22,13 @@ onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
 </script>
+<div class="mermaid">
+graph LR;
+A[setup] -->B(1);
+    B --> C{2};
+    C -->|2,1| D[done];
+    C -->|2.2| E[done];
+</div>
 noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
 
 ## Contacts
