@@ -22,8 +22,8 @@ A[setup] -->B(weswgs.sh);
 let graphStr = `graph LR;
 A[0] -->B(1);
     B --> C{2};
-    C -->|2.1| D[done];
-    C -->|2.2| E[done]`;
+    C -->|2.1 | D[done ];
+    C -->|2.2 | E[done ]`;
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
