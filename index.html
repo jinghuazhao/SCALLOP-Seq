@@ -1,8 +1,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
 <script>mermaid.initialize({startOnLoad:false});</script>
 <script>let graphStr = `graph LR;
-A[set up links] -->|now ready|B(weswgs.sh);
-    B --> C{two-part};
+A[set up links] -->B(weswgs.sh);
+    B --> C{2-parts};
     C -->|spa.sh| D[aggregate/upload];
     C -->|rva.sh| E[aggregate/upload]`;
 onload = () => {
@@ -34,11 +34,11 @@ onload = () => {
 </table>
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
 <p>The natural order is therefore</p>
-<div class="mermaid"><code>graph LR;
-A[set up links] -->B(weswgs.sh);
-    B --> C{2-parts};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload];</code></div>
+<pre class="mermaid"><code>graph LR;
+A[set up links] --&gt;B(weswgs.sh);
+    B --&gt; C{2-parts};
+    C --&gt;|spa.sh| D[aggregate/upload];
+    C --&gt;|rva.sh| E[aggregate/upload];</code></pre>
 <p>noting in particular that sbatch implicates the –wait option as the succeeding steps would require its full results.</p>
 <h2 id="contacts">Contacts</h2>
 <ul>
