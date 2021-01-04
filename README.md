@@ -1,5 +1,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
-<script>mermaid.initialize({startOnLoad:false});</script>
+<script>mermaid.initialize({
+startOnLoad:false
+  flowchart:{
+     htmlLabels: false
+     useMaxWidth: true
+  }
+});</script>
 <script>
 let graphStr = `graph LR;
 A[setup] -->B(weswgs.sh);
@@ -21,7 +27,7 @@ onload = () => {
 
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.
 
-The natural order is therefore
+The natural order is therefore (see diagram below)
 <div class="mermaid">
 graph LR;
 A[setup] -->B(weswgs.sh);
