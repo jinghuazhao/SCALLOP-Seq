@@ -11,8 +11,6 @@ onload = () => {
 }
 </script>
 
----
-
 ## Programs
 
 | Sequence | Filename  | Description           |
