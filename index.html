@@ -1,5 +1,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
 <script>mermaid.initialize({startOnLoad:false});</script>
+<script>let graphStr = `graph LR;
+A[set up links] -->|now ready|B(weswgs.sh);
+    B --> C{two-part};
+    C -->|spa.sh| D[aggregate/upload];
+    C -->|rva.sh| E[aggregate/upload]`;
+onload = () => {
+  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
+}
+</script>
 <h2 id="programs">Programs</h2>
 <table>
 <thead>
@@ -25,21 +34,11 @@
 </table>
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
 <p>The natural order is therefore</p>
-<pre class="mermaid"><code>graph LR;
+<div class="mermaid"><code>graph LR;
 A[set up links] -->|now ready|B(weswgs.sh);
     B --> C{two-part};
     C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload];</code></pre>
-<script>
-let graphStr = `graph LR;
-A[set up links] -->|now ready|B(weswgs.sh);
-    B --> C{two-part};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload]`;
-onload = () => {
-  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
-}
-</script>
+    C -->|rva.sh| E[aggregate/upload];</code></div>
 <p>noting in particular that sbatch implicates the –wait option as the succeeding steps would require its full results.</p>
 <h2 id="contacts">Contacts</h2>
 <ul>
