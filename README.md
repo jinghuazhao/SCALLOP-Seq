@@ -21,13 +21,6 @@ onload = () => {
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.
 
 The natural order is therefore
-```mermaid
-graph LR;
-A[setup] -->B(weswgs.sh);
-    B --> C{2-parts};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload];
-```
 <div class="mermaid">
 graph LR;
 A[set up links] -->B(weswgs.sh);
