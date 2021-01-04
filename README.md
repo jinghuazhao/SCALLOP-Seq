@@ -1,5 +1,14 @@
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
+<script>mermaid.initialize({startOnLoad:false});</script>
+<script>let graphStr = `graph LR;
+A[set up links] -->B(weswgs.sh);
+    B --> C{2-parts};
+    C -->|spa.sh| D[aggregate/upload];
+    C -->|rva.sh| E[aggregate/upload]`;
+onload = () => {
+  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
+}
+</script>
 
 ## Programs
 
