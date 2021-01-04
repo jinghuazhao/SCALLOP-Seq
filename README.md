@@ -6,8 +6,8 @@ A[0] -->B(1);
 B --> C{2};
 C -->|2.1~| D[done~];
 C -->|2.2~| E[done~]`;
-onload = () => {mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);}
 </script>
+<script>onload = () => {mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);}</script>
 ## Programs
 
 | Sequence | Filename  | Description           |
