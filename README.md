@@ -28,6 +28,11 @@ A[set up links] -->B(weswgs.sh);
     C -->|spa.sh| D[aggregate/upload];
     C -->|rva.sh| E[aggregate/upload];
 ```
+<div class="mermaid"><code>graph LR;
+A[set up links] -->B(weswgs.sh);
+    B --> C{2-parts};
+    C -->|spa.sh| D[aggregate/upload];
+    C -->|rva.sh| E[aggregate/upload];</code></div>
 noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
 
 ## Contacts
