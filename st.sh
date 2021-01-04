@@ -9,7 +9,7 @@ git add index.html
 git commit -m "index"
 git add index.html INTERVAL.md README.md idmap.do weswgs.R weswgs.sh wgs.wrap
 git add bgen.sb spa.* prune.wrap rva.*
-git commit -m "SCALLOP-seq meta-analysis"
+git commit -m "SCALLOP-seq association analysis"
 git add st.sh
 git commit -m "st.sh"
 git push
