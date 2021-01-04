@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 export TMPDIR=${HPC_WORK}/work
-export SEQ=${SCALLOP}/SEQ
+export SEQ=${SCALLOP}/SCALLOP-Seq
 
 function bgen()
 {
@@ -39,7 +39,9 @@ for weswgs in wes wgs
 do
   export weswgs=${weswgs}
   bgen
-  cut -f1,2 --complement ${SEQ}/work/${weswgs}.pheno | head -1 | tr '\t' '\n' > ${SEQ}/work/${weswgs}.varlist
+  if [ ! -f ${SEQ}/work/${weswgs}.varlist ]; then
+     cut -f1,2 --complement ${SEQ}/work/${weswgs}.pheno | head -1 | tr '\t' '\n' > ${SEQ}/work/${weswgs}.varlist
+  fi
   fastGWAsetup
   sbatch --export=ALL ${SEQ}/spa.sb
 done

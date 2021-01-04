@@ -50,7 +50,7 @@ grep -f work/wgs.exclude work/weswgs.txt
 grep -f work/wgs.exclude work/wgs.txt
 
 export TMPDIR=${HPC_WORK}/work
-export SEQ=${SCALLOP}/SEQ
+export SEQ=${SCALLOP}/SCALLOP-Seq
 export WES=${SEQ}/wes/WES_QCed_Info_updated_4006_FINAL.vcf.gz
 
 bcftools query -l ${WES} | \

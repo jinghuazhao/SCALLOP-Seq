@@ -12,7 +12,7 @@
 #SBATCH --export ALL
 
 export TMPDIR=${HPC_WORK}/work
-export SEQ=${SCALLOP}/SEQ
+export SEQ=${SCALLOP}/SCALLOP-Seq
 export COHORT=INTERVAL
 export CONFIG=${SEQ}/geneset_data/config.txt
 export STEP1="singularity exec ${SEQ}/burden_testing_latest.sif"

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 export chr=chr${SLURM_ARRAY_TASK_ID}
-export SEQ=${SCALLOP}/SEQ
+export SEQ=${SCALLOP}/SCALLOP-Seq
 export WGS=${SEQ}/wgs/${chr}/${chr}.intervalwgs_v2_GT_only.vcf.bgz
 
 bcftools query -l ${WGS} | \
