@@ -37,13 +37,3 @@ noting in particular that sbatch implicates the --wait option as the succeeding 
 * https://sites.google.com/site/jpopgen/wgsa
 * http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/
 * http://www.columbia.edu/~ii2135/Eigen_functions_112015.R
-
-<script>let graphStr = `graph LR;
-A[setup] -->B(weswgs.sh);
-    B --> C{2-parts};
-    C -->|spa.sh| D[aggregate/upload];
-    C -->|rva.sh| E[aggregate/upload]`;
-onload = () => {
-  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
-}
-</script>
