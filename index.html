@@ -28,7 +28,7 @@
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
 The natural order is therefore (see diagram below)
 <div class="mermaid">
-<p>graph LR; A[setup] –&gt;B(weswgs.sh); B –&gt; C{2-parts}; C –&gt;|spa.sh| D[aggregate/upload]; C –&gt;|rva.sh| E[aggregate/upload];</p>
+<p>graph LR; A[setup] –&gt;B(1); B –&gt; C{2}; C –&gt;|2,1| D[done]; C –&gt;|2.2| E[done];</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
 <script>mermaid.initialize({startOnLoad:false});</script>
@@ -36,8 +36,8 @@ The natural order is therefore (see diagram below)
 let graphStr = `graph LR;
 A[0] -->B(1);
     B --> C{2};
-    C -->|2.1 | D[done ];
-    C -->|2.2 | E[done ]`;
+    C -->|2.1~| D[done~];
+    C -->|2.2~| E[done~]`;
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
