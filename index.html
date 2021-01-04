@@ -2,10 +2,10 @@
 <script>mermaid.initialize({startOnLoad:false});</script>
 <script>
 let graphStr = `graph LR;
-A[set up links] --&gt;|now ready|B(weswgs.sh);
-    B --&gt; C{two-part};
-    C --&gt;|spa.sh| D[aggregate/upload];
-    C --&gt;|rva.sh| E[aggregate/upload];`
+A[set up links] -->|now ready|B(weswgs.sh);
+    B --> C{two-part};
+    C -->|spa.sh| D[aggregate/upload];
+    C -->|rva.sh| E[aggregate/upload];`
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
