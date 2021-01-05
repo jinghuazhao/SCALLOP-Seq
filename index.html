@@ -17,6 +17,9 @@ A[setup] -->B(1);
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
+mermaid.flowchartConfig = {
+    width: 100%
+}
 </script>
 <style>
  .mermaid {width:200% !important}
