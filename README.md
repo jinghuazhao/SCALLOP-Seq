@@ -8,7 +8,7 @@
 
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
 
-The natural order is therefore (see also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/)
+The natural order is therefore (see https://tinyurl.com/yy97vaes and also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/)
 
 ```mermaid
 graph LR;
