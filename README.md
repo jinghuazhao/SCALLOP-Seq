@@ -8,7 +8,7 @@
 
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
 
-The natural order is therefore (see [![](https://tinyurl.com/yy97vaes) and also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/)
+The natural order is therefore
 
 ```mermaid
 graph LR;
@@ -21,7 +21,9 @@ A[setup] -->B(1);
 
 ```
 
-noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
+[![](https://tinyurl.com/yy97vaes) and also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/.
+
+Note in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
 the number of array jobs and function to call in order to accommodate software (BOLT-LMM/GCTA --fastGWA) and model (mixed model/linear regression).
 
 ## Contacts
