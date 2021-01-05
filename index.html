@@ -13,7 +13,7 @@
 </table></figure>
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
 <p>The natural order is therefore</p>
-<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+<div><code class='language-mermaid' lang='mermaid'>graph LR;
 A[setup] --&gt;B(1);
     B --&gt; C{2}; B --&gt; F(idmap.do); B --&gt; I(wgs.sb);
     C --&gt;|2,1| D[done];
@@ -21,7 +21,7 @@ A[setup] --&gt;B(1);
     D --&gt; G(spa.sb); D --&gt; K(bgen.sb);
     E --&gt; H(rva.sb); E --&gt; J(prune.wrap);
 
-</code></pre>
+</code></div>
 <p>noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.</p>
 <h2>Contacts</h2>
 <ul>
