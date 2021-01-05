@@ -1,61 +1,45 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
-<script>mermaid.initialize({startOnLoad:false});</script>
-<script>let graphStr = `graph LR;
-A[0] -->B(1);
-B --> C{2};
-C -->|2.1~| D[done~];
-C -->|2.2~| E[done~]`;
-onload = () => {
-  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
-}
-</script>
-<h2 id="programs">Programs</h2>
-<table>
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>README</title></head>
+<body><h2>Programs</h2>
+<figure><table>
 <thead>
-<tr class="header">
-<th>Sequence</th>
-<th>Filename</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>weswgs.sh</td>
-<td>WES/WGS preprocessing</td>
-</tr>
-<tr class="even">
-<td>2.1</td>
-<td>rva.sh</td>
-<td>Rare-variant analysis</td>
-</tr>
-<tr class="odd">
-<td>2.2</td>
-<td>spa.sh</td>
-<td>Single-point analysis</td>
-</tr>
-</tbody>
-</table>
+<tr><th>Sequence</th><th>Filename</th><th>Description</th></tr></thead>
+<tbody><tr><td>1</td><td>weswgs.sh</td><td>WES/WGS preprocessing</td></tr><tr><td>2.1</td><td>rva.sh</td><td>Rare-variant analysis</td></tr><tr><td>2.2</td><td>spa.sh</td><td>Single-point analysis</td></tr></tbody>
+</table></figure>
 <p>idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.</p>
-The natural order is therefore
-<div class="mermaid">
-<p>graph LR; A[setup] –&gt;B(1); B –&gt; C{2}; C –&gt;|2,1| D[done]; C –&gt;|2.2| E[done];</p>
-</div>
-<p>noting in particular that sbatch implicates the –wait option as the succeeding steps would require its full results.</p>
-<h2 id="contacts">Contacts</h2>
+<p>The natural order is therefore</p>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+A[setup] --&gt;B(1);
+    B --&gt; C{2}; B --&gt; F(idmap.do); B --&gt; I(wgs.sb);
+    C --&gt;|2,1| D[done];
+    C --&gt;|2.2| E[done]; E --&gt; L(weswgs.R);
+    D --&gt; G(spa.sb); D --&gt; K(bgen.sb);
+    E --&gt; H(rva.sb); E --&gt; J(prune.wrap);
+
+</code></pre>
+<p>noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.</p>
+<h2>Contacts</h2>
 <ul>
-<li>Grace Png: grace.png@helmholtz-muenchen.de</li>
-<li>Arthur Gilly: arthur.gilly@helmholtz-muenchen.de</li>
+<li>Grace Png: <a href='mailto:grace.png@helmholtz-muenchen.de' target='_blank' class='url'>grace.png@helmholtz-muenchen.de</a></li>
+<li>Arthur Gilly: <a href='mailto:arthur.gilly@helmholtz-muenchen.de' target='_blank' class='url'>arthur.gilly@helmholtz-muenchen.de</a></li>
+
 </ul>
-<h2 id="slack-channel">Slack channel</h2>
+<h2>Slack channel</h2>
 <ul>
-<li><a href="https://scallop-seq.slack.com" class="uri">https://scallop-seq.slack.com</a></li>
+<li><a href='https://scallop-seq.slack.com'>https://scallop-seq.slack.com</a></li>
+
 </ul>
-<h2 id="urls">URLs</h2>
+<h2>URLs</h2>
 <ul>
-<li>https://github.com/hmgu-itg/burden_testing</li>
-<li>https://sites.google.com/site/jpopgen/dbNSFP</li>
-<li>https://sites.google.com/site/jpopgen/wgsa</li>
-<li>http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/</li>
-<li>http://www.columbia.edu/~ii2135/Eigen_functions_112015.R</li>
+<li><a href='https://github.com/hmgu-itg/burden_testing' target='_blank' class='url'>https://github.com/hmgu-itg/burden_testing</a></li>
+<li><a href='https://sites.google.com/site/jpopgen/dbNSFP' target='_blank' class='url'>https://sites.google.com/site/jpopgen/dbNSFP</a></li>
+<li><a href='https://sites.google.com/site/jpopgen/wgsa' target='_blank' class='url'>https://sites.google.com/site/jpopgen/wgsa</a></li>
+<li><a href='http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/' target='_blank' class='url'>http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/</a></li>
+<li><a href='http://www.columbia.edu/~ii2135/Eigen_functions_112015.R' target='_blank' class='url'>http://www.columbia.edu/~ii2135/Eigen_functions_112015.R</a></li>
+
 </ul>
+</body>
+</html>
