@@ -14,8 +14,8 @@ The natural order is therefore (see also [README.pdf](README.pdf) or https://jin
 graph LR;
 A[setup] -->B(1);
     B --> C{2}; B --> F(idmap.do); B --> I(wgs.sb);
-    C -->|2,1| D[done];
-    C -->|2.2| E[done]; E --> L(wes.R); E --> M(weswgs.R);
+    C -->|2,1| D[do];
+    C -->|2.2| E[do]; E --> L(wes.R); E --> M(weswgs.R);
     D --> G(spa.sb); D --> K(bgen.sb);
     E --> H(rva.sb); E --> J(prune.wrap);
 
