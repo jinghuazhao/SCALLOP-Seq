@@ -129,6 +129,7 @@ do
 # PCA
   gcta-1.9 --grm-gz ${SEQ}/work/${weswgs} --pca 20 --out ${SEQ}/work/${weswgs}
 # once is enough for generating phenotypes
+  if [ ${weswgs} == "wes" ]; R --no-save <wes.R 2>&1 | tee wes.log; fi
   if [ ${weswgs} == "wgs" ]; then R --no-save < weswgs.R 2>&1 | tee weswgs.log; fi
   for pheno in $(ls work/${weswgs} | xargs -I{} basename {} .pheno)
   do

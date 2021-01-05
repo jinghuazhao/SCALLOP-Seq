@@ -33,6 +33,9 @@ function fastGWAsetup()
 
 # fastGWA mixed model
   sed '1d' ${SEQ}/work/${weswgs}.pheno > ${SEQ}/work/spa/${weswgs}.pheno
+  if [ ${weswgs} == "wes" ]; then
+     sed '1d' ${SEQ}/work/${weswgs}-lr.pheno > ${SEQ}/work/spa/${weswgs}-lr.pheno
+  fi
 }
 
 for weswgs in wes wgs
@@ -45,6 +48,12 @@ do
   fastGWAsetup
   sbatch --export=ALL ${SEQ}/spa.sb
 done
+
+ls ${SEQ}/work/spa/wes*.fastGWA.gz | \
+xargs -l basename | \
+sed 's/wes-//g;s/.fastGWA.gz//g' | \
+grep -v chrX | \
+grep -v -f - ${SEQ}/work/wes.varlist > ${SEQ}/work/wes.lrlist
 
 if [ ! -d ${SEQ}/work/upload ]; then mkdir ${SEQ}/work/upload; fi
 
