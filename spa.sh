@@ -33,9 +33,7 @@ function fastGWAsetup()
 
 # fastGWA mixed model
   sed '1d' ${SEQ}/work/${weswgs}.pheno > ${SEQ}/work/spa/${weswgs}.pheno
-  if [ ${weswgs} == "wes" ]; then
-     sed '1d' ${SEQ}/work/${weswgs}-lr.pheno > ${SEQ}/work/spa/${weswgs}-lr.pheno
-  fi
+  sed '1d' ${SEQ}/work/${weswgs}-lr.pheno > ${SEQ}/work/spa/${weswgs}-lr.pheno
 }
 
 for weswgs in wes wgs
@@ -49,11 +47,14 @@ do
   sbatch --export=ALL ${SEQ}/spa.sb
 done
 
-ls ${SEQ}/work/spa/wes*.fastGWA.gz | \
-xargs -l basename | \
-sed 's/wes-//g;s/.fastGWA.gz//g' | \
-grep -v chrX | \
-grep -v -f - ${SEQ}/work/wes.varlist > ${SEQ}/work/wes.lrlist
+for weswgs in wes wgs
+do
+  ls ${SEQ}/work/spa/${weswgs}*.fastGWA.gz | \
+  xargs -l basename | \
+  sed 's/wes-//g;s/wgs-//g;s/.fastGWA.gz//g' | \
+  grep -v chrX | \
+  grep -v -f - ${SEQ}/work/${weswgs}.varlist > ${SEQ}/work/${weswgs}.lrlist
+done
 
 if [ ! -d ${SEQ}/work/upload ]; then mkdir ${SEQ}/work/upload; fi
 

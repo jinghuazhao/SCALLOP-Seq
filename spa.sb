@@ -4,7 +4,7 @@
 #SBATCH --account CARDIO-SL0-CPU
 #SBATCH --partition cardio
 #SBATCH --qos=cardio
-#SBATCH --array=1-122
+#SBATCH --array=1
 #SBATCH --mem=28800
 #SBATCH --time=5-00:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_weswgs_spa_%A_%a.o
@@ -66,7 +66,8 @@ function fastGWA()
 function fastLR()
 # fastGWA without --grm-sparse
 {
-  export phenocol=$(grep -n -f ${SEQ}/work/wes.lrlist ${SEQ}/work/wes.varlist | tr ':' '\t' | cut -f1 | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+  export phenocol=$(grep -n -f ${SEQ}/work/${weswgs}.lrlist ${SEQ}/work/${weswgs}.varlist | \
+                    tr ':' '\t' | cut -f1 | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
   export phenoname=$(awk 'NR==ENVIRON["phenocol"]{print $1}' ${SEQ}/work/${weswgs}.varlist)
   gcta-1.9 --mbgen ${SEQ}/work/${weswgs}.bgenlist \
            --fastGWA-lr --sample ${SEQ}/work/${weswgs}-chr1.sample \

@@ -24,9 +24,10 @@ giving 636,046 out of 116,133,865.
 
 * It is expected that there will be very minor changes with additional work on sample/genotype QC.
 
-## List of proteins which used alternative model
+## Multiple linear regressions (+20 PCs as covariates)
 
-These are mutiple linear regressions including 20 PCs as covariates -- they failed with mixed model.
+They replaced mixed models for 122 proteins + WES and inf1_IL.17A__Q16552 + WGS.
+
 ```
 cvd2_ANG.1__Q15389
 cvd2_ADAM.TS13__Q76LX8
