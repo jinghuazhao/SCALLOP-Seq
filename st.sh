@@ -4,7 +4,6 @@ git add .gitignore
 git commit -m ".gitignore"
 git add README.md
 git commit -m "README"
-pandoc -f markdown --mathml -t html README.md -o index.html
 git add index.html
 git commit -m "index"
 git add index.html INTERVAL.md README.md idmap.do weswgs.R weswgs.sh wgs.wrap
@@ -17,3 +16,5 @@ git push
 # git init
 # git remote add origin git@github.com:jinghuazhao/SCALLOP-Seq.git
 # git push --set-upstream origin master
+# pandoc -f markdown --mathml -t html README.md -o index.html
+
