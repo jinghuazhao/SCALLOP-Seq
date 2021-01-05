@@ -1,0 +1,24 @@
+/** Section styling */
+.section {
+  stroke: none; 
+/* below commented out because it conflicts with the readthedocs theme */
+/*  opacity: 0.2; */
+}
+/*--cssFile*/
+#container > svg {
+    max-width: 100% !important;
+}
+/*--configFile*/
+{
+  "flowchart": {
+      "useMaxWidth": true
+  }
+}
+/*
+mermaid-cli:latest \
+    -i "/work/mermaid.mmd" \
+    --scale 4 \
+    -o "/work/out.png" \
+    -b transparent \
+    --cssFile "/work/cssfile"
+*/
