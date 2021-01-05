@@ -10,8 +10,8 @@ let graphStr = `
 graph LR;
 A[setup] -->B(1);
     B --> C{2}; B --> F(idmap.do); B --> I(wgs.sb);
-    C -->|2,1| D[done];
-    C -->|2.2| E[done]; E --> L(wes.R);  E --> M(weswgs.R);
+    C -->|2,1| D[do];
+    C -->|2.2| E[do]; E --> L(wes.R);  E --> M(weswgs.R);
     D --> G(spa.sb); D --> K(bgen.sb);
     E --> H(rva.sb); E --> J(prune.wrap)`;
 onload = () => {
@@ -32,8 +32,8 @@ onload = () => {
 <div><code class='language-mermaid' lang='mermaid'>graph LR;
 A[setup] --&gt;B(1);
     B --&gt; C{2}; B --&gt; F(idmap.do); B --&gt; I(wgs.sb);
-    C --&gt;|2,1| D[done];
-    C --&gt;|2.2| E[done]; E --&gt; L(wes.R); E --&gt; M(weswgs.R)
+    C --&gt;|2,1| D[do];
+    C --&gt;|2.2| E[do]; E --&gt; L(wes.R); E --&gt; M(weswgs.R)
     D --&gt; G(spa.sb); D --&gt; K(bgen.sb);
     E --&gt; H(rva.sb); E --&gt; J(prune.wrap);
 
