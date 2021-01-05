@@ -49,24 +49,25 @@ done
 if [ ! -d ${SEQ}/work/upload ]; then mkdir ${SEQ}/work/upload; fi
 
 export study=INTERVAL
-export data_of_analysis=03012021
+export data_of_analysis=05012021
 export analyst_initials=JHZ
 
-parallel --env study --env date_of_analysis --env analyst_initials -C' '
-'
+parallel -j10 --env SEQ --env study --env date_of_analysis --env analyst_initials -C' ' '
   export olink_protein={1}
   export cohort=${study}_{2}
-  export out=${olink_protein}_${cohort}_${date_of_analysis}_${analyst_initials}.txt.bgz
-  (
-    echo -e "CHR\tSNP\tPOS\tEFF_ALLELE\tOTHER_ALLELE\tN\tEFF_ALLELE_FREQ\tBETA\tSE\tP"
-    gunzip -c work/spa/{2}-{1}.fastGWA.gz | \
-    sed '1d'
-    gunzip -c work/spa/{2}-{1}-chrX.fastGWA.gz | \
-    sed '1d'
-  ) | \
-  awk -vOFS="\t" "{print \$2,\$1,\$3,\$6,\$4,\$5,\$7,\$8,\$9,\$10}"
-  bgzip -f > ${SEQ}/work/upload/${out}
-  tabix -f ${SEQ}/work/upload/${out}
+  if [ -f ${SEQ}/work/spa/{2}-{1}.fastGWA.gz ] && [ -f ${SEQ}/work/spa/{2}-{1}-chrX.fastGWA.gz ]; then
+     export out=${olink_protein}_${cohort}_${date_of_analysis}_${analyst_initials}.txt.bgz
+     (
+       echo -e "CHR\tSNP\tPOS\tEFF_ALLELE\tOTHER_ALLELE\tN\tEFF_ALLELE_FREQ\tBETA\tSE\tP"
+       gunzip -c ${SEQ}/work/spa/{2}-{1}.fastGWA.gz | \
+       sed "1d"
+       gunzip -c ${SEQ}/work/spa/{2}-{1}-chrX.fastGWA.gz | \
+       sed "1d"
+     ) | \
+     awk -vOFS="\t" "{print \$2,\$1,\$3,\$6,\$4,\$5,\$7,\$8,\$9,\$10}" | \
+     bgzip -f > ${SEQ}/work/upload/${out}
+     tabix -f -0 -f -s2 -e3 -S1 -b3 ${SEQ}/work/upload/${out}
+  fi
 ' ::: $(cat ${SEQ}/work/${weswgs}.varlist) ::: wes wgs
 
 # <olink_protein>_<cohort>_<date_of_analysis>_<analyst_initials>.txt.bgz
