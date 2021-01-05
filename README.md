@@ -1,14 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
-<script>mermaid.initialize({startOnLoad:false});</script>
-<script>let graphStr = `graph LR;
-A[0] -->B(1);
-B --> C{2};
-C -->|2.1~| D[done~];
-C -->|2.2~| E[done~]`;
-onload = () => {
-  mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
-}
-</script>
 ## Programs
 
 | Sequence | Filename  | Description           |
@@ -20,13 +9,18 @@ onload = () => {
 idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.
 
 The natural order is therefore
-<div class="mermaid">
+
+```mermaid
 graph LR;
 A[setup] -->B(1);
-    B --> C{2};
+    B --> C{2}; B --> F(idmap.do); B --> I(wgs.sb);
     C -->|2,1| D[done];
-    C -->|2.2| E[done];
-</div>
+    C -->|2.2| E[done]; E --> L(weswgs.R);
+    D --> G(spa.sb); D --> K(bgen.sb);
+    E --> H(rva.sb); E --> J(prune.wrap);
+
+```
+
 noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
 
 ## Contacts
