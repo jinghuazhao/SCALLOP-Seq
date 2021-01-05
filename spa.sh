@@ -78,6 +78,8 @@ parallel -j10 --env SEQ --env study --env date_of_analysis --env analyst_initial
      tabix -f -0 -f -s2 -e3 -S1 -b3 ${SEQ}/work/upload/${out}
   fi
 ' ::: $(cat ${SEQ}/work/${weswgs}.varlist) ::: wes wgs
+# ::: $(grep -f ${SEQ}/work/wes.lrlist ${SEQ}/work/wes.varlist) ::: wes
+# -- the commented line is appropriate for collecting the linear regression results.
 
 # <olink_protein>_<cohort>_<date_of_analysis>_<analyst_initials>.txt.bgz
 #Column no      Column name     Description

@@ -4,7 +4,7 @@
 #SBATCH --account CARDIO-SL0-CPU
 #SBATCH --partition cardio
 #SBATCH --qos=cardio
-#SBATCH --array=1-368
+#SBATCH --array=1-122
 #SBATCH --mem=28800
 #SBATCH --time=5-00:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_weswgs_spa_%A_%a.o
@@ -63,4 +63,28 @@ function fastGWA()
   gzip -f ${SEQ}/work/spa/${weswgs}-${phenoname}*fastGWA
 }
 
-fastGWA
+function fastLR()
+# fastGWA without --grm-sparse
+{
+  export phenocol=$(grep -n -f ${SEQ}/work/wes.lrlist ${SEQ}/work/wes.varlist | tr ':' '\t' | cut -f1 | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+  export phenoname=$(awk 'NR==ENVIRON["phenocol"]{print $1}' ${SEQ}/work/${weswgs}.varlist)
+  gcta-1.9 --mbgen ${SEQ}/work/${weswgs}.bgenlist \
+           --fastGWA-lr --sample ${SEQ}/work/${weswgs}-chr1.sample \
+           --pheno ${SEQ}/work/spa/${weswgs}-lr.pheno --mpheno ${phenocol} --threads 10 \
+           --out ${SEQ}/work/spa/${weswgs}-${phenoname}
+
+  gcta-1.9 --mbgen ${SEQ}/work/${weswgs}.bgenlist \
+           --sample ${SEQ}/work/${weswgs}.sample \
+           --fastGWA-lr --model-only --pheno ${SEQ}/work/spa/${weswgs}-lr.pheno --mpheno ${phenocol} \
+           --keep ${SEQ}/work/spa/${weswgs}-chrX.idlist --threads 10 \
+           --out ${SEQ}/work/spa/${weswgs}-${phenoname}
+
+  gcta-1.9 --bgen ${SEQ}/work/${weswgs}-chrX.bgen \
+           --sample ${SEQ}/work/${weswgs}.sample \
+           --load-model ${SEQ}/work/spa/${weswgs}-${phenoname}.fastGWA \
+           --extract ${SEQ}/work/spa/${weswgs}-chrX.snplist --geno 0.1 --threads 10 \
+           --out ${SEQ}/work/spa/${weswgs}-${phenoname}-chrX
+  gzip -f ${SEQ}/work/spa/${weswgs}-${phenoname}*fastGWA
+}
+
+fastLR
