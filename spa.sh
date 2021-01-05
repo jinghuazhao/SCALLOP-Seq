@@ -49,7 +49,7 @@ done
 if [ ! -d ${SEQ}/work/upload ]; then mkdir ${SEQ}/work/upload; fi
 
 export study=INTERVAL
-export data_of_analysis=05012021
+export date_of_analysis=05012021
 export analyst_initials=JHZ
 
 parallel -j10 --env SEQ --env study --env date_of_analysis --env analyst_initials -C' ' '
