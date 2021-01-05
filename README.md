@@ -6,7 +6,7 @@
 | 2.1      | rva.sh    | Rare-variant analysis |
 | 2.2      | spa.sh    | Single-point analysis |
 
-idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists submitted centrally are described in INTERVAL.md.
+idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
 
 The natural order is therefore (see also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/)
 
@@ -21,7 +21,8 @@ A[setup] -->B(1);
 
 ```
 
-noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
+noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
+the number of array jobs and function to call in order to accommodate software (BOLT-LMM/GCTA --fastGWA) and model (mixed model/linear regression).
 
 ## Contacts
 
