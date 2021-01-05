@@ -14,14 +14,14 @@ The natural order is therefore
 graph LR;
 A[setup] -->B(1);
     B --> C{2}; B --> F(idmap.do); B --> I(wgs.sb);
-    C -->|2,1| D[do];
-    C -->|2.2| E[do]; E --> L(wes.R); E --> M(wgs.R); E --> N(weswgs.R);
+    C --> D[2,1];
+    C --> E[2.2]; E --> L(wes.R); E --> M(wgs.R); E --> N(weswgs.R);
     D --> G(spa.sb); D --> K(bgen.sb);
     E --> H(rva.sb); E --> J(prune.wrap);
 
 ```
 
-[![](https://tinyurl.com/yy97vaes)
+![](https://tinyurl.com/y6cmwvn6)
 
 and also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/.
 
