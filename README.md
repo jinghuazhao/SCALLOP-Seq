@@ -6,7 +6,7 @@
 | 2.1      | rva.sh    | Rare-variant analysis |
 | 2.2      | spa.sh    | Single-point analysis |
 
-idmap.do, ngs.wrap, weswgs.R, prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
+idmap.do, wgs.wrap, weswgs.R (which derives wes.R and wgs.R for PC-adjusted residuals), prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
 
 The natural order is therefore
 
