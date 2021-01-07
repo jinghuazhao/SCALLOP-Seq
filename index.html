@@ -8,12 +8,12 @@
 <script>
 let graphStr = `
 graph LR;
-A[setup] -->B(1);
-    B --> C{2}; B --> F(idmap.do); B --> I(wgs.sb);
-    C --> D[2,1];
-    C --> E[2.2]; E --> L(wes.R); E --> M(wgs.R); E --> N(weswgs.R);
-    D --> G(spa.sb); D --> K(bgen.sb);
-    E --> H(rva.sb); E --> J(prune.wrap)`;
+setup --> 1;
+    1 --> 2; 1 --> idmap.do; 1 --> wgs.sb;
+    2 --> 2.1;
+    2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R;
+    2.1 --> spa.sb; 2.1 --> bgen.sb;
+    2.2 --> rva.sb; 2.2 --> prune.wrap`;
 onload = () => {
   mermaid.render("mermaid", graphStr, document.getElementsByTagName("div")[0]);
 }
@@ -30,13 +30,13 @@ onload = () => {
 <p>idmap.do, wgs.wrap, weswgs.R (which derives wes.R and wgs.R for PC-adjusted residuals), prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.</p>
 <p>The natural order is therefore (see also README.pdf.</p>
 <div><code class='language-mermaid' lang='mermaid'>graph LR;
-A[setup] --&gt;B(1);
-    B --&gt; C{2}; B --&gt; F(idmap.do); B --&gt; I(wgs.sb);
-    C --&gt; D[2,1];
-    C --&gt; D[2.2]; E --&gt; L(wes.R); E --&gt; M(wgs.R); E --&gt; N(weswgs.R)
-    D --&gt; G(spa.sb); D --&gt; K(bgen.sb);
-    E --&gt; H(rva.sb); E --&gt; J(prune.wrap);
-
+graph LR;
+setup --> 1;
+    1 --> 2; 1 --> idmap.do; 1 --> wgs.sb;
+    2 --> 2.1;
+    2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R;
+    2.1 --> spa.sb; 2.1 --> bgen.sb;
+    2.2 --> rva.sb; 2.2 --> prune.wrap;
 </code></div>
 <p>noting in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
 the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed
