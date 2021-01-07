@@ -23,7 +23,7 @@ A[setup] -->B(1);
 
 ![](https://tinyurl.com/y6cmwvn6)
 
-and also [README.pdf](README.pdf) or https://jinghuazhao.github.io/SCALLOP-Seq/.
+and also [README.pdf](README.pdf).
 
 Note in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
 the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed 
