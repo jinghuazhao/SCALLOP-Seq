@@ -7,7 +7,7 @@
 <script>mermaid.initialize({startOnLoad:true});</script>
 <script>
 let graphStr = `
-graph LR;
+graph TB;
 setup ==> 1 ==> 2; 
     1 --> idmap.do; 1 --> wgs.sb;
     2 --> 2.1 --> spa.sb; 2.1 --> bgen.sb;
@@ -28,7 +28,7 @@ onload = () => {
 <p>idmap.do, wgs.wrap, weswgs.R (which derives wes.R and wgs.R for PC-adjusted residuals), prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.</p>
 <p>The natural order is therefore (see also README.pdf.</p>
 <div><code class='language-mermaid' lang='mermaid'>graph LR;
-graph LR;
+graph TB;
 setup ==> 1 ==> 2; 
     1 --> idmap.do; 1 --> wgs.sb;
     2 --> 2.1 --> spa.sb; 2.1 --> bgen.sb;
