@@ -18,7 +18,7 @@ setup ==> 1 ==> 2;
     2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
-![](https://tinyurl.com/y2asdh3r)
+![](https://tinyurl.com/y6ccpfhd)
 
 and also [README.pdf](README.pdf).
 
