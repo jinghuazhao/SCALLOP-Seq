@@ -12,12 +12,10 @@ The natural order is therefore
 
 ```mermaid
 graph LR;
-setup --> 1;
-    1 --> 2; 1 --> idmap.do; 1 --> wgs.sb;
-    2 --> 2.1;
-    2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R;
-    2.1 --> spa.sb; 2.1 --> bgen.sb;
-    2.2 --> rva.sb; 2.2 --> prune.wrap;
+setup ==> 1 ==> 2;
+    1 --> idmap.do; 1 --> wgs.sb;
+    2 --> 2.1; 2.1 --> spa.sb; 2.1 --> bgen.sb;
+    2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
 ![](https://tinyurl.com/y2asdh3r)
