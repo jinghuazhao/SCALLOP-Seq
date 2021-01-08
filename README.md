@@ -11,14 +11,14 @@ idmap.do, wgs.wrap, weswgs.R (which derives wes.R and wgs.R for PC-adjusted resi
 The natural order is therefore
 
 ```mermaid
-graph LR;
+graph TB;
 setup ==> 1 ==> 2;
     1 --> idmap.do; 1 --> wgs.sb;
     2 --> 2.1 --> spa.sb; 2.1 --> bgen.sb;
     2 --> 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
-![](https://tinyurl.com/y6ccpfhd)
+![](https://tinyurl.com/y25q6mx7)
 
 and also [README.pdf](README.pdf).
 
