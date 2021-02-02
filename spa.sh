@@ -76,7 +76,7 @@ parallel -j10 --env SEQ --env study --env date_of_analysis --env analyst_initial
      ) | \
      awk -vOFS="\t" "{print \$2,\$1,\$3,\$6,\$4,\$5,\$7,\$8,\$9,\$10}" | \
      bgzip -f > ${SEQ}/work/upload/${out}
-     tabix -f -0 -s2 -e3 -S1 -b3 ${SEQ}/work/upload/${out}
+     tabix -f -S1 -s2 -b3 -e3 {SEQ}/work/upload/${out}
   fi
 ' ::: $(cat ${SEQ}/work/${weswgs}.varlist) ::: wes wgs
 # ::: $(grep -f ${SEQ}/work/wes.lrlist ${SEQ}/work/wes.varlist) ::: wes
