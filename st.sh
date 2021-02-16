@@ -11,6 +11,8 @@ git add bgen.sb spa.* prune.wrap rva.*
 git commit -m "SCALLOP-seq association analysis"
 git add st.sh
 git commit -m "st.sh"
+git add cmp.sh
+git commit -m "compare"
 git push
 
 # git init
