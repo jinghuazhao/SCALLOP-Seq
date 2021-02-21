@@ -13,6 +13,8 @@ git add st.sh
 git commit -m "st.sh"
 git add cmp.sh
 git commit -m "compare"
+git add test
+git commit -m test
 git push
 
 # git init
