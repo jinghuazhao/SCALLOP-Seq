@@ -34,7 +34,8 @@ gzip -f > ${COHORT}-wes-wgs.variantlist.gz
 
 (
   gunzip -c ${COHORT}-wgs.variantlist.gz | head -1
-  gunzip -c ${COHORT}-wgs.variantlist.gz ${COHORT}-wes-wgs.variantlist.gz | sed '1d;s/X/23/;s/Y/24/' | sort -k1,1n -k2,2n | sed 's/23/X/;s/24/Y/'
+  gunzip -c ${COHORT}-wgs.variantlist.gz ${COHORT}-wes-wgs.variantlist.gz | \
+  sed '1d;s/^[x,X]/23/;s/^[y,Y]/24/' | sort -k1,1n -k2,2n | sed 's/^[2]3/X/;s/^[2]4/Y/'
 ) | \
 gzip -f > ${COHORT}-wes+wgs.variantlist.gz
 
