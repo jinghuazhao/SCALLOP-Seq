@@ -18,8 +18,6 @@ setup ==> 1; 1 ==> 2;
     2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
-![](https://tinyurl.com/y25q6mx7)
-
 and also [README.pdf](README.pdf).
 
 Note in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
