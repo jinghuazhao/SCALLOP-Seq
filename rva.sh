@@ -115,7 +115,7 @@ do
 # prune genotypes
   if [ ! -d ${SEQ}/work/prune ]; then mkdir ${SEQ}/work/prune; fi
   sbatch --job-name=_${weswgs} --account CARDIO-SL0-CPU --partition cardio --qos=cardio --array=1-22 --mem=40800 --time=5-00:00:00 --export ALL \
-         --output=${TMPDIR}/_${weswgs}_prune_%A_%a.out --error=${TMPDIR}/_${weswgs}_prune_%A_%a.err --wrap ". ${SCALLOP}/SEQ/prune.wrap"
+         --output=${TMPDIR}/_${weswgs}_prune_%A_%a.out --error=${TMPDIR}/_${weswgs}_prune_%A_%a.err --wrap ". ${SEQ}/prune.wrap"
   export SLURM_ARRAY_TASK_ID=X
   ${SEQ}/prune.wrap
   export SLURM_ARRAY_TASK_ID=Y
