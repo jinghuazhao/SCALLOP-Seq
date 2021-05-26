@@ -1,4 +1,4 @@
- SCALLOP-Seq meta-analysis
+# SCALLOP-Seq meta-analysis
 
 ## Programs
 
