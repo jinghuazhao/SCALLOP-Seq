@@ -2,7 +2,7 @@
 
 git add .gitignore
 git commit -m ".gitignore"
-git add README.md README.pdf
+git add README.md
 git commit -m "README"
 git add index.html mermain.css
 git commit -m "index"
