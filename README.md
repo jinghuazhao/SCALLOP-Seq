@@ -1,4 +1,4 @@
-# SCALLOP-Seq meta-analysis
+ SCALLOP-Seq meta-analysis
 
 ## Programs
 
@@ -19,8 +19,6 @@ setup ==> 1; 1 ==> 2;
     2 --> 2.1; 2.1 --> spa.sb; 2.1 --> bgen.sb;
     2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
-
-and also [README.pdf](README.pdf).
 
 Note in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
 the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed 
