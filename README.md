@@ -1,5 +1,17 @@
 # SCALLOP-Seq meta-analysis
 
+## Setup
+
+```bash
+singularity pull -F library://hmgu-itg/default/burden_testing:latest
+singularity inspect burden_testing_latest.sif | grep Version
+singularity exec burden_testing_latest.sif help
+singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
+singularity exec burden_testing_latest.sif prepare-regions -h
+singularity exec burden_testing_latest.sif make-group-file -h
+```
+for the latest or `:1.5.3`, see wiki instructions on [installation](https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation), [data](https://github.com/hmgu-itg/burden_testing/wiki/Data-input) and [SMMAT](https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT).
+
 ## Programs
 
 | Sequence | Filename  | Description           |
