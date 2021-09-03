@@ -20,6 +20,7 @@ export STEP2="singularity exec --containall ${SEQ}/burden_testing_latest.sif"
 
 export chr=chr${SLURM_ARRAY_TASK_ID}
 ${STEP2} step2 --cohort-name ${COHORT} \
+               --group-file group_file \
                --pheno work/${weswgs}/${pheno}.pheno \
                --GDS work/${weswgs}-${chr}.gds \
                --matrix-prefix work/${weswgs} \
