@@ -6,7 +6,7 @@ function setup()
   source ~/COVID-19/py37/bin/activate
 }
 
-setup
+# setup
 mkdocs build
 mkdocs gh-deploy
 
