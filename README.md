@@ -17,8 +17,8 @@ for the latest or `:1.5.3`, see wiki instructions on [installation](https://gith
 | Sequence | Filename  | Description           |
 | ---------|---------- | --------------------- |
 | 1        | weswgs.sh | WES/WGS preprocessing |
-| 2.1      | rva.sh    | Rare-variant analysis |
-| 2.2      | spa.sh    | Single-point analysis |
+| 2.1      | spa.sh    | Single-point analysis |
+| 2.2      | rva.sh    | Rare-variant analysis |
 
 idmap.do, wgs.wrap, weswgs.R (which derives wes.R and wgs.R for PC-adjusted residuals), prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
 
