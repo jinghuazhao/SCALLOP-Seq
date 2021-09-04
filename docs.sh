@@ -30,4 +30,5 @@ git push
 # git init
 # git remote add origin git@github.com:jinghuazhao/SCALLOP-Seq.git
 # git push --set-upstream origin master
+# OK with html and MathJax but not md and mermaid
 # pandoc -f markdown --mathml -t html README.md -o index.html
