@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+export TMPDIR=${HPC_WORK}/work
+export SEQ=~/COVID-19/SCALLOP-Seq
+export COHORT=INTERVAL
+export STEP1="singularity exec ${SEQ}/burden_testing_latest.sif"
+export STEP2="singularity exec --containall ${SEQ}/burden_testing_latest.sif"
+
+export chr=chr${SLURM_ARRAY_TASK_ID}
+cd ${SEQ}/work
+${STEP2} step2 --cohort-name ${COHORT} \
+               --GDS ${weswgs}-${chr}.gds \
+               --matrix-prefix ${weswgs} \
+               --matrix-type GCTA \
+               --pheno ${weswgs}/${pheno}.pheno \
+               --group-file ${SEQ}/${group_file} \
+               --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${chr}
+cd -

@@ -7,8 +7,6 @@ export CONFIG=${SEQ}/geneset_data/config.txt
 export STEP1="singularity exec ${SEQ}/burden_testing_latest.sif"
 export STEP2="singularity exec --containall ${SEQ}/burden_testing_latest.sif"
 
-cd work
-
 # --- step1 ---
 
 function step1()
@@ -128,27 +126,27 @@ function smmat()
     for group in ${groups[@]}
     do
       export group_file=${group}.groupfile.txt
-      sbatch ${SEQ}/rva.sb
-      for i in {1..22} X Y
+      for i in 22 # {1..22} # X Y
       do
         echo ${pheno} ${group} ${i}
         export SLURM_ARRAY_TASK_ID=${i}
         sbatch --job-name=_${weswgs}_${pheno} --account CARDIO-SL0-CPU --partition cardio --qos=cardio \
                --mem=40800 --time=5-00:00:00 --export ALL \
                --output=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.out --error=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.err \
-               --wrap ". ${SEQ}/rva.sb"
+               --wrap ". ${SEQ}/rva.wrap"
       done
     done
   done
 }
 
+cd work
 for weswgs in wes wgs
 do
   export weswgs=${weswgs}
+# step1
 # step2setup
   smmat
 done
-
 cd -
 
 # --- deprecated ---
