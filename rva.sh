@@ -114,7 +114,7 @@ function step2setup()
   gcta-1.9 --grm-gz ${SEQ}/work/${weswgs} --pca 20 --out ${SEQ}/work/${weswgs}
 # 2.3 once is enough for generating phenotypes
   if [ ${weswgs} == "wes" ]; then R --no-save <wes.R 2>&1 | tee wes.log; fi
-  if [ ${weswgs} == "wgs" ]; then R --no-save < weswgs.R 2>&1 | tee weswgs.log; fi
+  if [ ${weswgs} == "wgs" ]; then R --no-save <wgs.R 2>&1 | tee wgs.log; fi
 }
 
 function smmat()
@@ -122,7 +122,7 @@ function smmat()
 # 2.4 Single-cohort SMMAT assocaition analysis
   if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir -p ${SEQ}/rva/${weswgs}; fi
   export groups=(exon_CADD exon_reg exon_severe reg_Only)
-  for pheno in $(ls ${SEQ}/work/${weswgs} | xargs -I{} basename {} .pheno)
+  for pheno in $(ls ${SEQ}/work/${weswgs} | xargs -I{} basename {} -lr.pheno)
   do
     export pheno=${pheno}
     echo ${pheno}
