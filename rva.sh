@@ -125,13 +125,13 @@ function smmat()
   for pheno in $(ls ${SEQ}/work/${weswgs} | xargs -I{} basename {} -lr.pheno)
   do
     export pheno=${pheno}
-    echo ${pheno}
     for group in ${groups[@]}
     do
       export group_file=${group}.groupfile.txt
       sbatch ${SEQ}/rva.sb
-      for i in X Y
+      for i in {1..22} X Y
       do
+        echo ${pheno} ${group} ${i}
         export SLURM_ARRAY_TASK_ID=${i}
         sbatch --job-name=_${weswgs}_${pheno} --account CARDIO-SL0-CPU --partition cardio --qos=cardio \
                --mem=40800 --time=5-00:00:00 --export ALL \

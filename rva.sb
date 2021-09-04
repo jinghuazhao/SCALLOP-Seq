@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 
-#SBATCH --job-name=_rva
-#SBATCH --account CARDIO-SL0-CPU
-#SBATCH --partition cardio
-#SBATCH --qos=cardio
-#SBATCH --array=1-22
-#SBATCH --mem=28800
-#SBATCH --time=5-00:00:00
-#SBATCH --export ALL
+##SBATCH --job-name=_rva
+##SBATCH --account CARDIO-SL0-CPU
+##SBATCH --partition cardio
+##SBATCH --qos=cardio
+##SBATCH --array=1-22
+##SBATCH --mem=28800
+##SBATCH --time=5-00:00:00
+##SBATCH --export ALL
 
 export TMPDIR=${HPC_WORK}/work
 export SEQ=~/COVID-19/SCALLOP-Seq
