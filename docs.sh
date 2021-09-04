@@ -4,11 +4,11 @@ function setup()
 {
   module load python/3.7
   source ~/COVID-19/py37/bin/activate
+  mkdocs build
+  mkdocs gh-deploy
 }
 
-# setup
-mkdocs build
-mkdocs gh-deploy
+setup
 
 git add .gitignore
 git commit -m ".gitignore"
