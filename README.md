@@ -32,9 +32,11 @@ setup ==> 1; 1 ==> 2;
     2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
-Note in particular that sbatch implicates the --wait option as the succeeding steps would require its full results. It would need change spa.sb in
-the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed 
-model/linear regression).
+Note 
+
+1. in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
+2. It would need change `spa.sb` in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed model/linear regression).
+3. Although group generation is implemented `rva.sh`, the groups have been provided by the central analysis team.
 
 ## Contacts
 
