@@ -11,6 +11,8 @@ cd work
 
 # --- step1 ---
 
+function step1()
+{
 # 1.1 obtain variant lists
 
 for weswgs in wes wgs
@@ -73,6 +75,7 @@ do
   cut -f1 concat.group.file.txt | sort | uniq -c | awk '$1==1{print $2}'> ${name}-singlesnp.genes.txt
   fgrep -wvf ${name}-singlesnp.genes.txt concat.group.file.txt > ${name}-concat.group.file.filtered.txt
 done
+}
 
 # --- step2 ---
 
@@ -110,14 +113,14 @@ function step2setup()
 # PCA
   gcta-1.9 --grm-gz ${SEQ}/work/${weswgs} --pca 20 --out ${SEQ}/work/${weswgs}
 # 2.3 once is enough for generating phenotypes
-  if [ ${weswgs} == "wes" ]; R --no-save <wes.R 2>&1 | tee wes.log; fi
+  if [ ${weswgs} == "wes" ]; then R --no-save <wes.R 2>&1 | tee wes.log; fi
   if [ ${weswgs} == "wgs" ]; then R --no-save < weswgs.R 2>&1 | tee weswgs.log; fi
 }
 
 function smmat()
 {
 # 2.4 Single-cohort SMMAT assocaition analysis
-  if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir ${SEQ}/rva/${weswgs}; fi
+  if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir -p ${SEQ}/rva/${weswgs}; fi
   export groups=(exon_CADD exon_reg exon_severe reg_Only)
   for pheno in $(ls ${SEQ}/work/${weswgs} | xargs -I{} basename {} .pheno)
   do
@@ -126,14 +129,14 @@ function smmat()
     for group in ${groups[@]}
     do
       export group_file=${group}.groupfile.txt
-      sbatch ${SCALLOP}/SEQ/rva.sb
+      sbatch ${SEQ}/rva.sb
       for i in X Y
       do
         export SLURM_ARRAY_TASK_ID=${i}
         sbatch --job-name=_${weswgs}_${pheno} --account CARDIO-SL0-CPU --partition cardio --qos=cardio \
                --mem=40800 --time=5-00:00:00 --export ALL \
                --output=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.out --error=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.err \
-               --wrap ". ${SCALLOP}/SEQ/rva.sb"
+               --wrap ". ${SEQ}/rva.sb"
       done
     done
   done
