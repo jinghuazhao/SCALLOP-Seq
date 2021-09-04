@@ -1,0 +1,7 @@
+SCALLOP_Seq=~/rds/projects/olink_proteomics/scallop/SCALLOP-Seq/geneset_data/
+VEPdir=${SCALLOP_Seq}/vep
+VEPexec=${SCALLOP_Seq}/ensembl-vep/vep
+Linked_features=${SCALLOP_Seq}/Linked_features.bed.gz
+gencode_file=${SCALLOP_Seq}/gencode.basic.annotation.tsv.gz
+EigenPath=${SCALLOP_Seq}/scores/eigen.phred_v2.dat
+caddPath=${SCALLOP_Seq}/scores/whole_genome_SNVs.tsv.gz

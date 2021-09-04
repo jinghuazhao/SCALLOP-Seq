@@ -11,7 +11,7 @@ cd work
 
 # --- step1 ---
 
-# obtain variant lists
+# 1.1 obtain variant lists
 
 for weswgs in wes wgs
 do
@@ -39,11 +39,11 @@ gzip -f > ${COHORT}-wes-wgs.variantlist.gz
 ) | \
 gzip -f > ${COHORT}-wes+wgs.variantlist.gz
 
-# prepare regions
+# 1.2 prepare regions
 
 ${STEP1} prepare-regions -o $(pwd)/geneset_data
 
-# make (annotation) group files
+# 1.3 make (annotation) group files
 #
 #1. exon severe
 #   variants with a "high" predicted consequence according to Ensembl (roughly equivalent to more severe than missense)
@@ -54,64 +54,45 @@ ${STEP1} prepare-regions -o $(pwd)/geneset_data
 #4. regulatory only
 #   excluding exonic variants
 
-export OPTS1="-g exon"
-export OPTS2="-g exon -x 50 -s CADD"
-export OPTS3="-g exon -x 50 -e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
-export OPTS4="-e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
+export exon_severe="-g exon"
+export exson_CADD="-g exon -x 50 -s CADD"
+export exon_regulatory="-g exon -x 50 -e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
+export regulatory_only="-e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
+export groups=(exon_severe exson_CADD exon_regulatory regulatory_only)
 
 export chunks=2
-for panel in cvd2 cvd3 inf neu
+for group in ${!groups[@]}
 do
-  for group in OPTS{1..4}
+  export name=${groups[$group]}
+  export options=${!groups[$group]}
+  for i in $(seq $chunks)
   do
-    for i in $(seq $chunks)
-    do
-       ${STEP1} make-group-file -C ${CONFIG} -i ${COHORT}-${panel}-wes.variantlist.gz ${!group} -o -w $(pwd) -d ${chunks} -c $i &
-       ${STEP1} make-group-file -C ${CONFIG} -i ${COHORT}-${panel}-wgs.variantlist.gz ${!group} -o -w $(pwd) -d ${chunks} -c $i &
-    done
+     ${STEP1} make-group-file -C ${CONFIG} -i ${SEQ}/work/variantlist/${COHORT}-wes+wgs.variantlist.gz ${options} -o -w $(pwd) -d ${chunks} -c $i &
   done
+  find -name "group_file*.txt" -exec cat \{} \+ > ${name}-group_file.txt
+  cut -f1 concat.group.file.txt | sort | uniq -c | awk '$1==1{print $2}'> ${name}-singlesnp.genes.txt
+  fgrep -wvf ${name}-singlesnp.genes.txt concat.group.file.txt > ${name}-concat.group.file.filtered.txt
 done
-
-find -name "group_file*.txt" -exec cat \{} \+ > group_file.txt
-cut -f1 concat.group.file.txt | sort | uniq -c | awk '$1==1{print $2}'> singlesnp.genes.txt
-fgrep -wvf singlesnp.genes.txt concat.group.file.txt > concat.group.file.filtered.txt
-
-cd -
 
 # --- step2 ---
 
-function vcf2gds()
+function step2setup()
 {
-  cd work
-  for weswgs in wes wgs
+# 2.1 GDS
+  for i in {{1..22},X,Y}
   do
-    export weswgs=${weswgs}
-    for i in {{1..22},X,Y}
-    do
-      export i=${i}
-      R --no-save ${SEQ}/rva.R 2>&1 | tee ${SEQ}/rva.log
-  # inside singularity?
-#     ${STEP2} VCF2GDS ${weswgs}-chr${i}.vcf.gz ${weswgs}-chr${i}.gds 10
-    done
-  done
-  cd -
-}
-
+    export i=${i}
+    R --no-save ${SEQ}/rva.R 2>&1 | tee ${SEQ}/rva.log
 # inputs
 # - Filtered VCF file (see above section on Variant QC) OR GDS files if they already exist
 # - Phenotype files containing two columns: sample ID and INT-transformed, covariate-adjusted and renormalised residuals without header
 # - Genetic relatedness matrix (GRM) with sample IDs as row and column names
-
 # outputs
 # - A space-delimited file containing single variant scores
 # - A binary file containing between-variant covariance matrices
-
-vcf2gds
-
-for weswgs in wes wgs
-do
-  export weswgs=${weswgs}
-# relatedness matrix files
+#   ${STEP2} VCF2GDS ${weswgs}-chr${i}.vcf.gz ${weswgs}-chr${i}.gds 10
+  done
+# 2.2 relatedness matrix files
 # prune genotypes
   if [ ! -d ${SEQ}/work/prune ]; then mkdir ${SEQ}/work/prune; fi
   sbatch --job-name=_${weswgs} --account CARDIO-SL0-CPU --partition cardio --qos=cardio --array=1-22 --mem=40800 --time=5-00:00:00 --export ALL \
@@ -126,27 +107,48 @@ do
 # GRM with GCTA --mbfile but it does not tolerate
 # gcta-1.9 --mbfile work/${weswgs}.list --make-grm-gz --out work/${weswgs}
   gcta-1.9 --bfile ${SEQ}/work/${weswgs} --autosome --make-grm-gz --out ${SEQ}/work/${weswgs} --thread-num 12
-# GDS file and single-cohort SMMAT assocaition analysis
 # PCA
   gcta-1.9 --grm-gz ${SEQ}/work/${weswgs} --pca 20 --out ${SEQ}/work/${weswgs}
-# once is enough for generating phenotypes
+# 2.3 once is enough for generating phenotypes
   if [ ${weswgs} == "wes" ]; R --no-save <wes.R 2>&1 | tee wes.log; fi
   if [ ${weswgs} == "wgs" ]; then R --no-save < weswgs.R 2>&1 | tee weswgs.log; fi
-  for pheno in $(ls work/${weswgs} | xargs -I{} basename {} .pheno)
+}
+
+function smmat()
+{
+# 2.4 Single-cohort SMMAT assocaition analysis
+  if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir ${SEQ}/rva/${weswgs}; fi
+  export groups=(exon_CADD exon_reg exon_severe reg_Only)
+  for pheno in $(ls ${SEQ}/work/${weswgs} | xargs -I{} basename {} .pheno)
   do
     export pheno=${pheno}
     echo ${pheno}
-    sbatch ${SCALLOP}/SEQ/rva.sb
-    for i in X Y
+    for group in ${groups[@]}
     do
-      export SLURM_ARRAY_TASK_ID=${i}
-      sbatch --job-name=_${weswgs}_${pheno} --account CARDIO-SL0-CPU --partition cardio --qos=cardio \
-             --mem=40800 --time=5-00:00:00 --export ALL \
-             --output=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.out --error=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.err \
-             --wrap ". ${SCALLOP}/SEQ/rva.sb"
+      export group_file=${group}.groupfile.txt
+      sbatch ${SCALLOP}/SEQ/rva.sb
+      for i in X Y
+      do
+        export SLURM_ARRAY_TASK_ID=${i}
+        sbatch --job-name=_${weswgs}_${pheno} --account CARDIO-SL0-CPU --partition cardio --qos=cardio \
+               --mem=40800 --time=5-00:00:00 --export ALL \
+               --output=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.out --error=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.err \
+               --wrap ". ${SCALLOP}/SEQ/rva.sb"
+      done
     done
   done
+}
+
+for weswgs in wes wgs
+do
+  export weswgs=${weswgs}
+# step2setup
+  smmat
 done
+
+cd -
+
+# --- deprecated ---
 
 # Meta-analysis
 
@@ -167,9 +169,7 @@ cut -f4 | sed '1d' | grep -v -f work/wes.samples
 awk '($2=="NA" && $4!="NA") && ($5!="NA"||$6!="NA"||$7!="NA"||$8!="NA")' ${idmap} | \
 cut -f4 | sed '1d' | grep -v -f work/wes.samples | grep -f - ${idmap}
 
-# --- deprecated ---
-
-function gihub()
+function github()
 # Various steps based on the GitHub other than singularity version.
 {
   cd burden_testing
