@@ -120,7 +120,7 @@ function smmat()
 # 2.4 Single-cohort SMMAT assocaition analysis
   if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir -p ${SEQ}/rva/${weswgs}; fi
   export groups=(exon_CADD exon_reg exon_severe reg_Only)
-  for pheno in $(ls ${SEQ}/work/${weswgs} | xargs -I{} basename {} -lr.pheno)
+  for pheno in $(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I{} basename {} -lr.pheno)
   do
     export pheno=${pheno}
     for group in ${groups[@]}
