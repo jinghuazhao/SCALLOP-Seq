@@ -3,8 +3,8 @@
 export TMPDIR=${HPC_WORK}/work
 export SEQ=~/COVID-19/SCALLOP-Seq
 export COHORT=INTERVAL
-export STEP1="singularity exec -B ${SEQ} ${SEQ}/burden_testing_latest.sif"
-export STEP2="singularity exec -B ${SEQ} --containall ${SEQ}/burden_testing_latest.sif"
+export STEP1="singularity exec --bind ${SEQ} ${SEQ}/burden_testing_latest.sif"
+export STEP2="singularity exec --bind ${SEQ} --containall ${SEQ}/burden_testing_latest.sif"
 
 export chr=chr${SLURM_ARRAY_TASK_ID}
 cd ${SEQ}/work

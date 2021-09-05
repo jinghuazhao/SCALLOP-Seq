@@ -4,8 +4,8 @@ export TMPDIR=${HPC_WORK}/work
 export SEQ=~/COVID-19/SCALLOP-Seq
 export COHORT=INTERVAL
 export CONFIG=${SEQ}/geneset_data/config.txt
-export STEP1="singularity exec -B ${SEQ} ${SEQ}/burden_testing_latest.sif"
-export STEP2="singularity exec -B ${SEQ} --containall -H ${HOME}:${HOME}/COVID-19/SCALLOP-INF ${SEQ}/burden_testing_latest.sif"
+export STEP1="singularity exec --bind ${SEQ} ${SEQ}/burden_testing_latest.sif"
+export STEP2="singularity exec --bind ${SEQ} --containall ${SEQ}/burden_testing_latest.sif"
 
 # --- step1 ---
 
