@@ -12,7 +12,7 @@ ${STEP2} step2 --cohort-name ${COHORT} \
                --GDS ${weswgs}-${chr}.gds \
                --matrix-prefix ${weswgs} \
                --matrix-type GCTA \
-               --pheno ${pheno}.pheno \
+               --pheno ${pheno}-lr.pheno \
                --group-file ${SEQ}/${group_file} \
                --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${chr}
 cd -
