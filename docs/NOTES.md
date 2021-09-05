@@ -21,7 +21,7 @@ Additional information can be obtained with `singularity exec --help`. For debug
 singularity shell --bind ${PWD} --containall -s /usr/bin/bash burden_testing_latest.sif
 ```
 
-and the container has its own HOME directory within which `~` is recognised. It is worth noting that the `--bind` option is `-B` with `singularity exec`.
+and the container has its own HOME directory within which `~` is recognised.
 
 1. in particular that sbatch implicates the `--wait` option as the succeeding steps would require its full results.
 2. It would need change `spa.sb` in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA `--fastGWA/fastGWAS-lr` for mixed model/linear regression).
