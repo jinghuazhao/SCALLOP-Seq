@@ -2,7 +2,6 @@ site_name: SCALLOP-Seq
 nav:
   - Home: index.md
   - INTERVAL: INTERVAL.md
-  - Variantlist: variantlists.md
   - NOTES: NOTES.md
 theme:
     name: mkdocs
