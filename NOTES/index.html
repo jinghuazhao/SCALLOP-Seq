@@ -114,13 +114,13 @@ singularity exec burden_testing_latest.sif make-group-file -h
 </code></pre>
 <p>and the container has its own HOME directory within which <code>~</code> is recognised.</p>
 <ol>
-<li>in particular that sbatch implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
-<li>It would need change <code>spa.sb</code> in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
-<li>The groups have been provided by the central analysis team.</li>
+<li>The call to <code>sbatch</code> implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
+<li>The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
+<li>The group filess for rare variant analysis have been provided by the central analysis team.</li>
 </ol>
 <h2 id="urls">URLs</h2>
 <ul>
-<li><a href="https://sylabs.io/">Sylabs</a></li>
+<li><a href="https://sylabs.io/">Sylabs</a> (<a href="https://github.com/sylabs">GitHub</a>)</li>
 </ul></div>
 </div>
 </div>
