@@ -1,6 +1,7 @@
 site_name: SCALLOP-Seq
 nav:
   - Home: README.md
+  - Variantlist: variantlist.md
 theme:
     name: mkdocs
     nav_style: dark
