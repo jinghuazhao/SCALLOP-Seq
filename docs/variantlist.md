@@ -1,3 +1,5 @@
+# INTERVAL variant list
+
 ## Variant lists as of 11/11/2020
 
 The following two files were also uploaded.
