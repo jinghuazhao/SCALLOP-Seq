@@ -32,8 +32,8 @@ neu <- olink("neu")
 
 # WES/WGS samples
 weswgs <- read.delim("work/weswgs.txt")
-wes <- scan("work/wes.idmap",what="")
-pca_wes <- read.table("work/wes.eigenvec",col.names=c("FID","id",paste0("PC",1:20))) %>% select(-FID)
+wgs <- scan("work/wgs.idmap",what="")
+pca_wgs <- read.table("work/wgs.eigenvec",col.names=c("FID","id",paste0("PC",1:20))) %>% select(-FID)
 
 ## Stata version
 idmap <- function(f,weswgs_id)
@@ -49,7 +49,7 @@ idmap <- function(f,weswgs_id)
   subset(d,id%in%weswgs_id)
 }
 
-id_wes <- idmap("work/wes.txt",wes) %>% select(-c(Olink_cvd2_gwasQC_24m, Olink_cvd3_gwasQC_24m, Olink_inf_gwasQC_24m, Olink_neu_gwasQC_24m))
+id_wgs <- idmap("work/wgs.txt",wgs) %>% select(-c(Olink_cvd2_gwasQC_24m, Olink_cvd3_gwasQC_24m, Olink_inf_gwasQC_24m, Olink_neu_gwasQC_24m))
 
 panels <- function(d,weswgs_id,pca)
 {
@@ -65,7 +65,7 @@ panels <- function(d,weswgs_id,pca)
   d
 }
 
-y_wes <- panels(id_wes,"id",pca_wes)
+y_wgs <- panels(id_wgs,"id",pca_wgs)
 
 library(gap)
 normalize_sapply <- function(d)
@@ -85,10 +85,10 @@ normalize_sapply <- function(d)
   rownames(z) <- d[["id"]]
   data.frame(id=d[["id"]],z)
 }
-y_wes_sapply <- normalize_sapply(y_wes)
-wes.id <- y_wes_sapply %>% select(id) %>% rename(FID=id) %>% mutate(IID=FID)
-wes.pheno <- y_wes_sapply %>% select(-id)
-write.table(data.frame(wes.id,wes.pheno),file="work/wes-lr.pheno",quote=FALSE,row.names=FALSE,sep="\t")
+y_wgs_sapply <- normalize_sapply(y_wgs)
+wgs.id <- y_wgs_sapply %>% select(id) %>% rename(FID=id) %>% mutate(IID=FID)
+wgs.pheno <- y_wgs_sapply %>% select(-id)
+write.table(data.frame(wgs.id,wgs.pheno),file="work/wgs-lr.pheno",quote=FALSE,row.names=FALSE,sep="\t")
 
 output <- function(weswgs,d)
 {
@@ -101,4 +101,4 @@ output <- function(weswgs,d)
             })
   )
 }
-output("work/wes",y_wes_sapply)
+output("work/wgs",y_wgs_sapply)

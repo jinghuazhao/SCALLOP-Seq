@@ -4,8 +4,8 @@ export TMPDIR=${HPC_WORK}/work
 export SEQ=~/COVID-19/SCALLOP-Seq
 export COHORT=INTERVAL
 export CONFIG=${SEQ}/geneset_data/config.txt
-export STEP1="singularity exec ${SEQ}/burden_testing_latest.sif"
-export STEP2="singularity exec --containall ${SEQ}/burden_testing_latest.sif"
+export STEP1="singularity exec -B ${SEQ} ${SEQ}/burden_testing_latest.sif"
+export STEP2="singularity exec -B ${SEQ} --containall -H ${HOME}:${HOME}/COVID-19/SCALLOP-INF ${SEQ}/burden_testing_latest.sif"
 
 # --- step1 ---
 
@@ -13,8 +13,6 @@ function step1()
 {
 # 1.1 obtain variant lists
 
-for weswgs in wes wgs
-do
   export weswgs=${weswgs}
   echo chr{1..22} chrX chrY | \
   tr ' ' '\n' | \
@@ -24,24 +22,23 @@ do
     for chr in chr{1..22} chrX chrY; do zcat ${COHORT}-${weswgs}.${chr}.variantlist.gz; done | \
     sed 's/^chr//' 
   ) | gzip -f > ${COHORT}-${weswgs}.variantlist.gz
-done
 
-join -v1 -t$'\t' <(gunzip -c ${COHORT}-wes.variantlist.gz | awk -vOFS="\t" 'NR>1 {snpid=$1":"$2"_"$3"_"$4;print snpid,$0}' | sort -k1,1) \
-                 <(gunzip -c ${COHORT}-wgs.variantlist.gz | awk -vOFS="\t" 'NR>1 {snpid=$1":"$2"_"$3"_"$4;print snpid,$0}' | sort -k1,1) | \
-sort -k2,2n -k3,3n | \
-cut -f1 --complement | \
-gzip -f > ${COHORT}-wes-wgs.variantlist.gz
+  join -v1 -t$'\t' <(gunzip -c ${COHORT}-wes.variantlist.gz | awk -vOFS="\t" 'NR>1 {snpid=$1":"$2"_"$3"_"$4;print snpid,$0}' | sort -k1,1) \
+                   <(gunzip -c ${COHORT}-wgs.variantlist.gz | awk -vOFS="\t" 'NR>1 {snpid=$1":"$2"_"$3"_"$4;print snpid,$0}' | sort -k1,1) | \
+  sort -k2,2n -k3,3n | \
+  cut -f1 --complement | \
+  gzip -f > ${COHORT}-wes-wgs.variantlist.gz
 
-(
-  gunzip -c ${COHORT}-wgs.variantlist.gz | head -1
-  gunzip -c ${COHORT}-wgs.variantlist.gz ${COHORT}-wes-wgs.variantlist.gz | \
-  sed '1d;s/^[x,X]/23/;s/^[y,Y]/24/' | sort -k1,1n -k2,2n | sed 's/^[2]3/X/;s/^[2]4/Y/'
-) | \
-gzip -f > ${COHORT}-wes+wgs.variantlist.gz
+  (
+    gunzip -c ${COHORT}-wgs.variantlist.gz | head -1
+    gunzip -c ${COHORT}-wgs.variantlist.gz ${COHORT}-wes-wgs.variantlist.gz | \
+    sed '1d;s/^[x,X]/23/;s/^[y,Y]/24/' | sort -k1,1n -k2,2n | sed 's/^[2]3/X/;s/^[2]4/Y/'
+  ) | \
+  gzip -f > ${COHORT}-wes+wgs.variantlist.gz
 
 # 1.2 prepare regions
 
-${STEP1} prepare-regions -o $(pwd)/geneset_data
+  ${STEP1} prepare-regions -o $(pwd)/geneset_data
 
 # 1.3 make (annotation) group files
 #
@@ -54,25 +51,25 @@ ${STEP1} prepare-regions -o $(pwd)/geneset_data
 #4. regulatory only
 #   excluding exonic variants
 
-export exon_severe="-g exon"
-export exson_CADD="-g exon -x 50 -s CADD"
-export exon_regulatory="-g exon -x 50 -e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
-export regulatory_only="-e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
-export groups=(exon_severe exson_CADD exon_regulatory regulatory_only)
+  export exon_severe="-g exon"
+  export exson_CADD="-g exon -x 50 -s CADD"
+  export exon_regulatory="-g exon -x 50 -e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
+  export regulatory_only="-e promoter,enhancer,TF_bind -l promoter,enhancer,TF_bind -s EigenPhred"
+  export groups=(exon_severe exson_CADD exon_regulatory regulatory_only)
 
-export chunks=2
-for group in ${!groups[@]}
-do
-  export name=${groups[$group]}
-  export options=${!groups[$group]}
-  for i in $(seq $chunks)
+  export chunks=2
+  for group in ${!groups[@]}
   do
-     ${STEP1} make-group-file -C ${CONFIG} -i ${SEQ}/work/variantlist/${COHORT}-wes+wgs.variantlist.gz ${options} -o -w $(pwd) -d ${chunks} -c $i &
+    export name=${groups[$group]}
+    export options=${!groups[$group]}
+    for i in $(seq $chunks)
+    do
+       ${STEP1} make-group-file -C ${CONFIG} -i ${SEQ}/work/variantlist/${COHORT}-wes+wgs.variantlist.gz ${options} -o -w $(pwd) -d ${chunks} -c $i &
+    done
+    find -name "group_file*.txt" -exec cat \{} \+ > ${name}.group_file.txt
+    cut -f1 concat.group.file.txt | sort | uniq -c | awk '$1==1{print $2}'> ${name}-singlesnp.genes.txt
+    fgrep -wvf ${name}-singlesnp.genes.txt concat.group.file.txt > ${name}-concat.group.file.filtered.txt
   done
-  find -name "group_file*.txt" -exec cat \{} \+ > ${name}-group_file.txt
-  cut -f1 concat.group.file.txt | sort | uniq -c | awk '$1==1{print $2}'> ${name}-singlesnp.genes.txt
-  fgrep -wvf ${name}-singlesnp.genes.txt concat.group.file.txt > ${name}-concat.group.file.filtered.txt
-done
 }
 
 # --- step2 ---
@@ -92,6 +89,7 @@ function step2setup()
 # - A space-delimited file containing single variant scores
 # - A binary file containing between-variant covariance matrices
 #   ${STEP2} VCF2GDS ${weswgs}-chr${i}.vcf.gz ${weswgs}-chr${i}.gds 10
+# singularity shell -B $(pwd) --containall -s /bin/bash burden_testing_latest.sif
   done
 # 2.2 relatedness matrix files
 # prune genotypes
