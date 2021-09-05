@@ -1,18 +1,16 @@
-#!/usr/bin/bash
+#/usr/bin/bash
 
-export TMPDIR=${HPC_WORK}/work
-export SEQ=~/COVID-19/SCALLOP-Seq
-export COHORT=INTERVAL
-export STEP1="singularity exec --bind ${SEQ} ${SEQ}/burden_testing_latest.sif"
-export STEP2="singularity exec --bind ${SEQ} --containall ${SEQ}/burden_testing_latest.sif"
-
-export chr=chr${SLURM_ARRAY_TASK_ID}
-cd ${SEQ}/work
-${STEP2} step2 --cohort-name ${COHORT} \
-               --GDS ${weswgs}-${chr}.gds \
-               --matrix-prefix ${weswgs} \
-               --matrix-type GCTA \
-               --pheno ${pheno}-lr.pheno \
-               --group-file ${SEQ}/${group_file} \
-               --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${chr}
-cd -
+singularity exec --env SEQ=${SEQ} \
+                 --env COHORT=${COHORT} \
+                 --env weswgs=${weswgs} \
+                 --env chr=${chr} \
+                 --env group_file=${group_file} \
+                 --env pheno=${pheno} \
+                 --bind ${SEQ} --containall ${SEQ}/burden_testing_latest.sif step2 \
+                                            --cohort-name ${COHORT} \
+                                            --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
+                                            --matrix-prefix ${SEQ}/work/${weswgs} \
+                                            --matrix-type GCTA \
+                                            --pheno ${SEQ}/work/wes/${pheno}-lr.pheno \
+                                            --group-file ${SEQ}/${group_file} \
+                                            --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${chr}

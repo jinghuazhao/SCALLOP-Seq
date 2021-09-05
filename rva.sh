@@ -118,7 +118,7 @@ function smmat()
 # 2.4 Single-cohort SMMAT assocaition analysis
   if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir -p ${SEQ}/rva/${weswgs}; fi
   export groups=(exon_CADD exon_reg exon_severe reg_Only)
-  for pheno in $(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I{} basename {} -lr.pheno)
+  for pheno in $(ls ${SEQ}/work/${weswgs}/*.pheno | sed 's/-lr//' | xargs -I{} basename {} .pheno)
   do
     export pheno=${pheno}
     for group in ${groups[@]}
@@ -131,7 +131,7 @@ function smmat()
         sbatch --job-name=_${weswgs}_${pheno} --account CARDIO-SL0-CPU --partition cardio --qos=cardio \
                --mem=40800 --time=5-00:00:00 --export ALL \
                --output=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.out --error=${TMPDIR}/_${weswgs}_${pheno}_%A_%a.err \
-               --wrap ". ${SEQ}/rva.wrap"
+               --wrap "${SEQ}/rva.wrap"
       done
     done
   done
