@@ -4,7 +4,8 @@
 
 ```bash
 singularity pull -F library://hmgu-itg/default/burden_testing:latest
-singularity inspect burden_testing_latest.sif | grep Version
+singularity inspect burden_testing_latest.sif | \
+grep Version
 singularity exec burden_testing_latest.sif help
 singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
 singularity exec burden_testing_latest.sif prepare-regions -h
@@ -20,7 +21,7 @@ for the latest or `:1.5.3`, see wiki instructions on [installation](https://gith
 | 2.1      | spa.sh    | Single-point analysis |
 | 2.2      | rva.sh    | Rare-variant analysis |
 
-idmap.do, wgs.wrap, weswgs.R (which derives wes.R and wgs.R for PC-adjusted residuals), prune.wrap, rva.sb, spa.sb are subprograms; and remarks on variant lists and results submitted centrally are described in INTERVAL.md.
+Remarks on INTERVAL variant lists and results submitted centrally are described in [variantlist.md](variantlist.md).
 
 The natural order is therefore
 
@@ -42,8 +43,8 @@ singularity shell --bind ${PWD} --containall -s /usr/bin/bash burden_testing_lat
 
 and the container has its own HOME directory within which `~` is recognised. It is worth noting that the `--bind` option is `-B` with `singularity exec`.
 
-1. in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
-2. It would need change `spa.sb` in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed model/linear regression).
+1. in particular that sbatch implicates the `--wait` option as the succeeding steps would require its full results.
+2. It would need change `spa.sb` in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA `--fastGWA/fastGWAS-lr` for mixed model/linear regression).
 3. Although group generation is implemented `rva.sh`, the groups have been provided by the central analysis team.
 
 ## Contacts
