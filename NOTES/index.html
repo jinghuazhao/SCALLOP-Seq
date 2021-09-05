@@ -112,7 +112,7 @@ singularity exec burden_testing_latest.sif make-group-file -h
 <p>Additional information can be obtained with <code>singularity exec --help</code>. For debugging, e.g., on VCF2GDS, one can invoke the singularity shell via</p>
 <pre><code class="language-bash">singularity shell --bind ${PWD} --containall -s /usr/bin/bash burden_testing_latest.sif
 </code></pre>
-<p>and the container has its own HOME directory within which <code>~</code> is recognised. It is worth noting that the <code>--bind</code> option is <code>-B</code> with <code>singularity exec</code>.</p>
+<p>and the container has its own HOME directory within which <code>~</code> is recognised.</p>
 <ol>
 <li>in particular that sbatch implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
 <li>It would need change <code>spa.sb</code> in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
