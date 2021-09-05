@@ -42,6 +42,9 @@
 <a class="nav-link" href=".">Home</a>
 </li>
 <li class="navitem">
+<a class="nav-link" href="INTERVAL/">INTERVAL</a>
+</li>
+<li class="navitem">
 <a class="nav-link" href="variantlists/">Variantlist</a>
 </li>
 <li class="navitem">
@@ -60,7 +63,7 @@
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="variantlists/" rel="next">
+<a class="nav-link" href="INTERVAL/" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -80,10 +83,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-level="1"><a class="nav-link" href="#scallop-seq-meta-analysis">SCALLOP-Seq meta-analysis</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#programs">Programs</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 <li class="nav-item" data-level="2"><a class="nav-link" href="#consortium-contacts">Consortium contacts</a>
 <ul class="nav flex-column">
 </ul>
@@ -103,41 +102,6 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="scallop-seq-meta-analysis">SCALLOP-Seq meta-analysis</h1>
-<h2 id="programs">Programs</h2>
-<table>
-<thead>
-<tr>
-<th>Sequence</th>
-<th>Filename</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>weswgs.sh</td>
-<td>WES/WGS preprocessing</td>
-</tr>
-<tr>
-<td>2.1</td>
-<td>spa.sh</td>
-<td>Single-point analysis</td>
-</tr>
-<tr>
-<td>2.2</td>
-<td>rva.sh</td>
-<td>Rare-variant analysis</td>
-</tr>
-</tbody>
-</table>
-<p>Remarks on INTERVAL variant lists and results submitted centrally are described in <a href="variantlists/">variantlists.md</a>.</p>
-<p>The natural order is therefore</p>
-<div class="mermaid">graph TB;
-setup ==&gt; 1; 1 ==&gt; 2;
-    1 --&gt; idmap.do; 1 --&gt; wgs.sb;
-    2 --&gt; 2.1; 2.1 --&gt; spa.sb; 2.1 --&gt; bgen.sb;
-    2 --&gt; 2.2; 2.2 --&gt; wes.R; 2.2 --&gt; wgs.R; 2.2 --&gt; weswgs.R; 2.2 --&gt; rva.sb; 2.2 --&gt; prune.wrap;
-</div>
 <h2 id="consortium-contacts">Consortium contacts</h2>
 <ul>
 <li>Grace Png: grace.png@helmholtz-muenchen.de</li>
@@ -233,9 +197,9 @@ setup ==&gt; 1; 1 ==&gt; 2;
 </div>
 </div>
 </div>
-<script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script><script>mermaid.initialize({});</script></body>
+</body>
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-09-05 16:40:45.085114+00:00
+Build Date UTC : 2021-09-05 16:51:41.346400+00:00
 -->
