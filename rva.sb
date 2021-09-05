@@ -1,0 +1,57 @@
+#!/usr/bin/bash
+
+#SBATCH --job-name=_rva
+#SBATCH --account CARDIO-SL0-CPU
+#SBATCH --partition cardio
+#SBATCH --qos=cardio
+#SBATCH --array=1-24%6
+#SBATCH --mem=28800
+#SBATCH --time=5-00:00:00
+#SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
+#SBATCH --error=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.e
+#SBATCH --export ALL
+
+export TMPDIR=${HPC_WORK}/work
+export SEQ=~/COVID-19/SCALLOP-Seq
+export COHORT=INTERVAL
+
+singularity_exec()
+{
+  export id=${SLURM_ARRAY_TASK_ID}
+  if [ ${id} -eq 23 ]; then
+     export chr=chrX
+  elif [ ${id} -eq 24 ]; then
+     export chr=chrY
+  else
+     export chr=chr${id}
+  fi
+  singularity exec --env SEQ=${SEQ} \
+                   --env COHORT=${COHORT} \
+                   --env weswgs=${weswgs} \
+                   --env chr=${chr} \
+                   --env group_file=${group_file} \
+                   --env pheno=${pheno} \
+                   --bind ${SEQ} --containall ${SEQ}/burden_testing_latest.sif step2 \
+                                              --cohort-name ${COHORT} \
+                                              --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
+                                              --matrix-prefix ${SEQ}/work/${weswgs} \
+                                              --matrix-type GCTA \
+                                              --pheno ${SEQ}/work/wes/${pheno}-lr.pheno \
+                                              --group-file ${SEQ}/${group_file} \
+                                              --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${chr}
+}
+
+export groups=(exon_CADD exon_reg exon_severe reg_Only)
+for pheno in $(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno)
+do
+  export pheno=${pheno}
+  for weswgs in wes wgs
+  do
+    for group in ${groups[@]}
+    do
+      export group_file=${group}.groupfile.txt
+      echo ${pheno} ${weswgs} ${group}
+      singularity_exec
+    done
+  done
+done

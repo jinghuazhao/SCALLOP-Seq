@@ -118,13 +118,13 @@ function smmat()
 # 2.4 Single-cohort SMMAT assocaition analysis
   if [ ! -d ${SEQ}/rva/${weswgs} ]; then mkdir -p ${SEQ}/rva/${weswgs}; fi
   export groups=(exon_CADD exon_reg exon_severe reg_Only)
-  for pheno in $(ls ${SEQ}/work/${weswgs}/*.pheno | sed 's/-lr//' | xargs -I{} basename {} .pheno)
+  for pheno in $(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno)
   do
     export pheno=${pheno}
     for group in ${groups[@]}
     do
       export group_file=${group}.groupfile.txt
-      for i in 22 # {1..22} # X Y
+      for i in {1..22} X Y
       do
         echo ${pheno} ${group} ${i}
         export SLURM_ARRAY_TASK_ID=${i}
@@ -137,17 +137,22 @@ function smmat()
   done
 }
 
-cd work
-for weswgs in wes wgs
-do
-  export weswgs=${weswgs}
-# step1
-# step2setup
-  smmat
-done
-cd -
+sbatch ${SEQ}/rva.sb
 
 # --- deprecated ---
+
+function dummy()
+{
+  cd work
+  for weswgs in wes wgs
+  do
+    export weswgs=${weswgs}
+    step1
+    step2setup
+    smmat
+  done
+  cd -
+}
 
 # Meta-analysis
 
