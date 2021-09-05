@@ -1,4 +1,4 @@
-# INTERVAL variant list
+# INTERVAL variant lists
 
 ## Variant lists as of 11/11/2020
 
