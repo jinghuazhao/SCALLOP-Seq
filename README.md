@@ -34,6 +34,14 @@ setup ==> 1; 1 ==> 2;
 
 Note 
 
+Additional information can be obtained with `singularity exec --help`. For debugging, e.g., on VCF2GDS, one can invoke the singularity shell via
+
+```bash
+singularity shell --bind ${PWD} --containall -s /usr/bin/bash burden_testing_latest.sif
+```
+
+and the container has its own HOME directory within which `~` is recognised. It is worth noting that the `--bind` option is `-B` with `singularity exec`.
+
 1. in particular that sbatch implicates the --wait option as the succeeding steps would require its full results.
 2. It would need change `spa.sb` in the number of array jobs and function to call in order to accommodate software and model (BOLT-LMM, GCTA --fastGWA/fastGWAS-lr for mixed model/linear regression).
 3. Although group generation is implemented `rva.sh`, the groups have been provided by the central analysis team.
@@ -49,6 +57,7 @@ Note
 
 ## URLs
 
+* [Sylabs](https://sylabs.io/)
 * [https://github.com/hmgu-itg/burden_testing](https://github.com/hmgu-itg/burden_testing)
 * [https://sites.google.com/site/jpopgen/dbNSFP](https://sites.google.com/site/jpopgen/dbNSFP)
 * [https://sites.google.com/site/jpopgen/wgsa](https://sites.google.com/site/jpopgen/wgsa)
