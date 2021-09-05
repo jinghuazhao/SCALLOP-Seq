@@ -21,7 +21,7 @@ for the latest or `:1.5.3`, see wiki instructions on [installation](https://gith
 | 2.1      | spa.sh    | Single-point analysis |
 | 2.2      | rva.sh    | Rare-variant analysis |
 
-Remarks on INTERVAL variant lists and results submitted centrally are described in [variantlist.md](variantlist.md).
+Remarks on INTERVAL variant lists and results submitted centrally are described in [variantlists.md](variantlists.md).
 
 The natural order is therefore
 
