@@ -114,7 +114,7 @@ singularity exec burden_testing_latest.sif make-group-file -h
 </code></pre>
 <p>and the container has its own HOME directory within which <code>~</code> is recognised.</p>
 <ol>
-<li>The call to <code>sbatch</code> implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
+<li>The embedded call to <code>sbatch</code> implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
 <li>The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
 <li>The group filess for rare variant analysis have been provided by the central analysis team.</li>
 </ol>
