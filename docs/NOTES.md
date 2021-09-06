@@ -23,7 +23,7 @@ singularity shell --bind ${PWD} --containall -s /usr/bin/bash burden_testing_lat
 
 and the container has its own HOME directory within which `~` is recognised.
 
-1. The call to `sbatch` implicates the `--wait` option as the succeeding steps would require its full results.
+1. The embedded call to `sbatch` implicates the `--wait` option as the succeeding steps would require its full results.
 2. The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA `--fastGWA/fastGWAS-lr` for mixed model/linear regression).
 3. The group filess for rare variant analysis have been provided by the central analysis team.
 

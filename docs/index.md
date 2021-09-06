@@ -2,8 +2,8 @@
 
 ## Consortium contacts
 
-* Grace Png: grace.png@helmholtz-muenchen.de
-* Arthur Gilly: arthur.gilly@helmholtz-muenchen.de
+* Grace Png
+* Arthur Gilly
 
 ## Slack channel
 
