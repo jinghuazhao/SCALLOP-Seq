@@ -35,14 +35,14 @@ onload = () => {
 </figure>
 Remarks on variant lists and results submitted centrally are described in INTERVAL.md.</p>
 
-<div>
-<code class='language-mermaid' lang='mermaid'>graph LR;
+<div class="mermaid" id="mermaidChart0">
+<svg>
 graph TB;
 setup ==> 1 ==> 2; 
     1 --> idmap.do; 1 --> wgs.wrap;
     2 --> 2.1 --> spa.sb; 2.1 --> bgen.sb;
     2 --> 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
-</code>
+</svg>
 </div>
 </body>
 </html>
