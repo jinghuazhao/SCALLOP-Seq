@@ -4,7 +4,7 @@
 #SBATCH --account CARDIO-SL0-CPU
 #SBATCH --partition cardio
 #SBATCH --qos=cardio
-#SBATCH --array=1-24%6
+#SBATCH --array=1-368%6
 #SBATCH --mem=28800
 #SBATCH --time=5-00:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
@@ -17,14 +17,6 @@ export COHORT=INTERVAL
 
 singularity_exec()
 {
-  export id=${SLURM_ARRAY_TASK_ID}
-  if [ ${id} -eq 23 ]; then
-     export chr=chrX
-  elif [ ${id} -eq 24 ]; then
-     export chr=chrY
-  else
-     export chr=chr${id}
-  fi
   singularity exec --env SEQ=${SEQ} \
                    --env COHORT=${COHORT} \
                    --env weswgs=${weswgs} \
@@ -38,19 +30,21 @@ singularity_exec()
                                               --matrix-type GCTA \
                                               --pheno ${SEQ}/work/wes/${pheno}-lr.pheno \
                                               --group-file ${SEQ}/${group_file} \
-                                              --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${chr}
+                                              --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${group}-${chr}
 }
 
 export groups=(exon_CADD exon_reg exon_severe reg_Only)
-for pheno in $(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno)
+export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+for weswgs in wes wgs
 do
-  export pheno=${pheno}
-  for weswgs in wes wgs
+  export weswgs=${weswgs}
+  for chrs in {1..22} X Y
   do
+    export chr=chr${chrs}
     for group in ${groups[@]}
     do
       export group_file=${group}.groupfile.txt
-      echo ${pheno} ${weswgs} ${group}
+      echo ${pheno} ${weswgs} ${chr} ${group}
       singularity_exec
     done
   done
