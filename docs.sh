@@ -20,7 +20,7 @@ git commit -m "SCALLOP-seq association analysis"
 git add docs docs.sh
 git commit -m "docs"
 git add tests
-git commit -m tests
+git commit -m "tests"
 git add mkdocs.yml
 git commit -m "mkdocs.yml"
 git push
