@@ -4,7 +4,6 @@
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 <title>Test of mermaid</title>
 </head>
-<script src="load-mathjax.js" async></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" crossorigin="anonymous"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
 <script>
@@ -43,12 +42,5 @@ setup ==> 1 ==> 2;
     2 --> 2.1 --> spa.sb; 2.1 --> bgen.sb;
     2 --> 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 </div>
-
-A MathJax example from epigenomewide association statistic $z_{EWAS}$ defined through methylation data so that
-$$
-z_{EWAS} = \frac{w^T_{me}z_T}{\sqrt{w^T_{me}Vw_{me}}}
-$$
-
-where $w_{me}$ is the weight associated with methylation. See https://docs.mathjax.org/en/latest/web/configuration.html#local-configuration-file.
 </body>
 </html>
