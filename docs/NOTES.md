@@ -18,7 +18,7 @@ for the latest or `:1.5.3`, see wiki instructions on [installation](https://gith
 Additional information can be obtained with `singularity exec --help`. For debugging, e.g., on VCF2GDS, one can invoke the singularity shell via
 
 ```bash
-singularity shell --bind ${PWD} --containall -s /usr/bin/bash burden_testing_latest.sif
+singularity shell --bind ${PWD} --containall --shell /usr/bin/bash burden_testing_latest.sif
 ```
 
 and the container has its own HOME directory within which `~` is recognised.
