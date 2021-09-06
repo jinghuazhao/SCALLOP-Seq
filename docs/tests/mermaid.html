@@ -36,13 +36,6 @@ onload = () => {
 </figure>
 Remarks on variant lists and results submitted centrally are described in INTERVAL.md.</p>
 
-A MathJax example from epigenomewide association statistic $z_{EWAS}$ defined through methylation data so that
-$$
-z_{EWAS} = \frac{w^T_{me}z_T}{\sqrt{w^T_{me}Vw_{me}}}
-$$
-
-where $w_{me}$ is the weight associated with methylation. See https://docs.mathjax.org/en/latest/web/configuration.html#local-configuration-file.
-
 <div class="mermaid" id="mermaidChart0">
 graph TB;
 setup ==> 1 ==> 2; 
@@ -50,5 +43,12 @@ setup ==> 1 ==> 2;
     2 --> 2.1 --> spa.sb; 2.1 --> bgen.sb;
     2 --> 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 </div>
+
+A MathJax example from epigenomewide association statistic $z_{EWAS}$ defined through methylation data so that
+$$
+z_{EWAS} = \frac{w^T_{me}z_T}{\sqrt{w^T_{me}Vw_{me}}}
+$$
+
+where $w_{me}$ is the weight associated with methylation. See https://docs.mathjax.org/en/latest/web/configuration.html#local-configuration-file.
 </body>
 </html>
