@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 #SBATCH --job-name=_rva
-#SBATCH --account CARDIO-SL0-CPU
-#SBATCH --partition cardio
+#SBATCH --account=CARDIO-SL0-CPU
+#SBATCH --partition=cardio
 #SBATCH --cpus-per-task=9
 #SBATCH --qos=cardio
 #SBATCH --array=1-368%6
