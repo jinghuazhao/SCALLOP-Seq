@@ -106,6 +106,7 @@ singularity exec burden_testing_latest.sif help
 singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
 singularity exec burden_testing_latest.sif prepare-regions -h
 singularity exec burden_testing_latest.sif make-group-file -h
+singularity exec --containall burden_testing_latest.sif step2 --help
 </code></pre>
 <p>for the latest or <code>:1.5.3</code>, see wiki instructions on <a href="https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation">installation</a>, <a href="https://github.com/hmgu-itg/burden_testing/wiki/Data-input">data</a> and <a href="https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT">SMMAT</a>.</p>
 <h2 id="debugging">Debugging</h2>
@@ -116,7 +117,9 @@ singularity exec burden_testing_latest.sif make-group-file -h
 <ol>
 <li>The embedded call to <code>sbatch</code> implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
 <li>The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
-<li>The group filess for rare variant analysis have been provided by the central analysis team.</li>
+<li>The group filess for rare variant analysis have been provided by the central analysis team. Note that</li>
+<li>They are whole-genome so are preferably split by chromosome.</li>
+<li>No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.</li>
 </ol>
 <h2 id="urls">URLs</h2>
 <ul>
