@@ -1,0 +1,38 @@
+#!/usr/bin/bash
+
+#SBATCH --job-name=test
+#SBATCH --account=PETERS-SL3-CPU
+#SBATCH --partition=skylake
+#SBATCH --cpus-per-task=2
+#SBATCH --array=1-5
+#SBATCH --mem=18800
+#SBATCH --time=12:00:00
+#SBATCH --output=/home/jhz22/_test_%A_%a.o
+#SBATCH --error=/home/jhz22/_test_%A_%a.e
+#SBATCH --export ALL
+
+export TMPDIR=${HPC_WORK}/work
+export SEQ=~/COVID-19/SCALLOP-Seq
+export COHORT=INTERVAL
+
+singularity_exec()
+{
+  echo ${weswgs}
+}
+
+export groups=(exon_CADD exon_reg exon_severe reg_Only)
+for weswgs in wes wgs
+do
+  export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+  export weswgs=${weswgs}
+  for chrs in {1..22}
+  do
+    export chr=chr${chrs}
+    for group in ${groups[@]}
+    do
+      export group_file=${group}-${chrs}.groupfile.txt
+      echo ${pheno} ${weswgs} ${chr} ${group}
+      singularity_exec
+    done
+  done
+done
