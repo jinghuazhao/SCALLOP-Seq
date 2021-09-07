@@ -90,6 +90,14 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-level="1"><a class="nav-link" href="#rvasb">rva.sb</a>
 <ul class="nav flex-column">
+<li class="nav-item" data-level="2"><a class="nav-link" href="#scripts">scripts</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#an-example-list">An example list</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -98,6 +106,7 @@
 <div class="col-md-9" role="main">
 <h1 id="rvasb">rva.sb</h1>
 <p>It is a dummy for [wes, wgs] x [1-5 proteins] x [4 groups] x [1-22 chromosomes] combinations as in the rare variant analysis (rva).</p>
+<h2 id="scripts">scripts</h2>
 <pre><code class="language-bash">#!/usr/bin/bash
 
 #SBATCH --job-name=test
@@ -137,6 +146,7 @@ do
   done
 done
 </code></pre>
+<h2 id="an-example-list">An example list</h2>
 <p>The _test*.o files list the combinations as intended, e.g., <a href="../_rva_46245269_1.o">_rva_46245269_1.o</a> with an empty <a href="../_rva_46245269_1.e">_rva_46245269_1.e</a>.</p>
 <pre><code>cvd2_ACE2__Q9BYF1 wes chr1 exon_CADD
 wes
