@@ -27,8 +27,8 @@ and the container has its own HOME directory within which `~` is recognised.
 1. The embedded call to `sbatch` implicates the `--wait` option as the succeeding steps would require its full results.
 2. The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA `--fastGWA/fastGWAS-lr` for mixed model/linear regression).
 3. The group filess for rare variant analysis have been provided by the central analysis team. Note that
-   * They are whole-genome so are preferably split by chromosome.
-   * No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.
+   a. They are whole-genome so are preferably split by chromosome.
+   b. No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.
 
 ## URLs
 
