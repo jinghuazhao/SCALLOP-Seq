@@ -70,6 +70,15 @@ function step1()
     cut -f1 concat.group.file.txt | sort | uniq -c | awk '$1==1{print $2}'> ${name}-singlesnp.genes.txt
     fgrep -wvf ${name}-singlesnp.genes.txt concat.group.file.txt > ${name}-concat.group.file.filtered.txt
   done
+# Partition of group files by chromosome
+  export groups=(exon_CADD exon_reg exon_severe reg_Only)
+  for group in ${groups[@]}
+  do
+    export group=${group}
+    export group_file=${group}.groupfile.txt
+    seq 22 | \
+    parallel --env group --env group_file -C' ' 'awk -vchr={} "\$2==chr" ${group_file} | sort -k2,2n > ${group}-{}.groupfile.txt'
+  done
 }
 
 # --- step2 ---
