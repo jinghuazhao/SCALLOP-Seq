@@ -3,6 +3,7 @@ nav:
   - Home: index.md
   - INTERVAL: INTERVAL.md
   - NOTES: NOTES.md
+  - Tests:
     - tests/tests.md
 theme:
     name: mkdocs
