@@ -2,8 +2,9 @@
 
 ## Consortium contacts
 
-* Grace Png
 * Arthur Gilly
+* Grace Png
+* Young-Chan Park
 
 ## Slack channel
 
