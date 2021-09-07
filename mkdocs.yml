@@ -4,7 +4,8 @@ nav:
   - INTERVAL: INTERVAL.md
   - NOTES: NOTES.md
   - Tests:
-    - tests/tests.md
+    - tests/rva.md
+    - tests/cmp.md
 theme:
     name: mkdocs
     nav_style: dark
