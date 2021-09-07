@@ -2,6 +2,8 @@
 
 It is a dummy for [wes, wgs] x [1-5 proteins] x [4 groups] x [1-22 chromosomes] combinations as in the rare variant analysis (rva).
 
+## scripts
+
 ```bash
 #!/usr/bin/bash
 
@@ -42,6 +44,8 @@ do
   done
 done
 ```
+
+## An example list
 
 The _test*.o files list the combinations as intended, e.g., [_rva_46245269_1.o](_rva_46245269_1.o) with an empty [_rva_46245269_1.e](_rva_46245269_1.e).
 
