@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 
-#SBATCH --job-name=test
+#SBATCH --job-name=rva
 #SBATCH --account=PETERS-SL3-CPU
 #SBATCH --partition=skylake
 #SBATCH --cpus-per-task=2
 #SBATCH --array=1-5
 #SBATCH --mem=18800
 #SBATCH --time=12:00:00
-#SBATCH --output=/home/jhz22/_test_%A_%a.o
-#SBATCH --error=/home/jhz22/_test_%A_%a.e
+#SBATCH --output=/home/jhz22/_rva_%A_%a.o
+#SBATCH --error=/home/jhz22/_rva_%A_%a.e
 #SBATCH --export ALL
 
 export TMPDIR=${HPC_WORK}/work
