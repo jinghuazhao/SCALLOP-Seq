@@ -3,7 +3,7 @@
 #SBATCH --job-name=_rva
 #SBATCH --account CARDIO-SL0-CPU
 #SBATCH --partition cardio
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=9
 #SBATCH --qos=cardio
 #SBATCH --array=1-368%6
 #SBATCH --mem=28800
@@ -32,7 +32,7 @@ singularity_exec()
                                               --matrix-type GCTA \
                                               --pheno ${SEQ}/work/wes/${pheno}-lr.pheno \
                                               --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
-                                              --threads 6
+                                              --threads 9
 }
 
 export groups=(exon_CADD exon_reg exon_severe reg_Only)
