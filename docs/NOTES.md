@@ -10,6 +10,7 @@ singularity exec burden_testing_latest.sif help
 singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
 singularity exec burden_testing_latest.sif prepare-regions -h
 singularity exec burden_testing_latest.sif make-group-file -h
+singularity exec --containall burden_testing_latest.sif step2 --help
 ```
 for the latest or `:1.5.3`, see wiki instructions on [installation](https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation), [data](https://github.com/hmgu-itg/burden_testing/wiki/Data-input) and [SMMAT](https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT).
 
@@ -25,7 +26,9 @@ and the container has its own HOME directory within which `~` is recognised.
 
 1. The embedded call to `sbatch` implicates the `--wait` option as the succeeding steps would require its full results.
 2. The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA `--fastGWA/fastGWAS-lr` for mixed model/linear regression).
-3. The group filess for rare variant analysis have been provided by the central analysis team.
+3. The group filess for rare variant analysis have been provided by the central analysis team. Note that
+   * They are whole-genome so are preferably split by chromosome.
+   * No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.
 
 ## URLs
 
