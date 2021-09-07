@@ -5,7 +5,7 @@
 #SBATCH --partition cardio
 #SBATCH --cpus-per-task=6
 #SBATCH --qos=cardio
-#SBATCH --array=7-368%6
+#SBATCH --array=1-368%6
 #SBATCH --mem=28800
 #SBATCH --time=5-00:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
@@ -32,13 +32,13 @@ singularity_exec()
                                               --matrix-type GCTA \
                                               --pheno ${SEQ}/work/wes/${pheno}-lr.pheno \
                                               --out ${SEQ}/rva/${weswgs}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
-                                              --thread 6
+                                              --threads 6
 }
 
 export groups=(exon_CADD exon_reg exon_severe reg_Only)
-export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
 for weswgs in wes wgs
 do
+  export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
   export weswgs=${weswgs}
   for chrs in {1..22}
   do
