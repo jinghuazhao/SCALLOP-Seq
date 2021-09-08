@@ -1,4 +1,4 @@
-# rva.sb
+# rva
 
 It is a dummy for [wes, wgs] x [1-5 proteins] x [4 groups] x [1-22 chromosomes] combinations as in the rare variant analysis (rva).
 
