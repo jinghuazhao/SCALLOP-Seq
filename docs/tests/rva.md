@@ -7,15 +7,15 @@ It is a dummy for [wes, wgs] x [1-5 proteins] x [4 groups] x [1-22 chromosomes] 
 ```bash
 #!/usr/bin/bash
 
-#SBATCH --job-name=test
+#SBATCH --job-name=_rva
 #SBATCH --account=PETERS-SL3-CPU
 #SBATCH --partition=skylake
 #SBATCH --cpus-per-task=2
 #SBATCH --array=1-5
 #SBATCH --mem=18800
 #SBATCH --time=12:00:00
-#SBATCH --output=/home/jhz22/_test_%A_%a.o
-#SBATCH --error=/home/jhz22/_test_%A_%a.e
+#SBATCH --output=/home/jhz22/_rva_%A_%a.o
+#SBATCH --error=/home/jhz22/_rva_%A_%a.e
 #SBATCH --export ALL
 
 export TMPDIR=${HPC_WORK}/work
@@ -47,7 +47,7 @@ done
 
 ## An example list
 
-The _test*.o files list the combinations as intended, e.g., [_rva_46245269_1.o](_rva_46245269_1.o) with an empty [_rva_46245269_1.e](_rva_46245269_1.e).
+The _rva*.o files list the combinations as intended, e.g., [_rva_46245269_1.o](_rva_46245269_1.o) with an empty [_rva_46245269_1.e](_rva_46245269_1.e).
 
 ```
 cvd2_ACE2__Q9BYF1 wes chr1 exon_CADD
