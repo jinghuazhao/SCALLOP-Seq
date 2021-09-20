@@ -5,7 +5,7 @@
 #SBATCH --partition=cardio
 #SBATCH --cpus-per-task=9
 #SBATCH --qos=cardio
-#SBATCH --array=1-368%6
+#SBATCH --array=1-368
 #SBATCH --mem=28800
 #SBATCH --time=5-00:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
@@ -31,7 +31,7 @@ singularity_exec()
                                               --group-file ${SEQ}/${group_file} \
                                               --matrix-prefix ${SEQ}/work/${weswgs} \
                                               --matrix-type GCTA \
-                                              --pheno ${SEQ}/work/wes/${pheno}-lr.pheno \
+                                              --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
                                               --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
                                               --threads 9
 }
