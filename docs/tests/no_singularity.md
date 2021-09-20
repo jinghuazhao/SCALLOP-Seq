@@ -1,0 +1,53 @@
+# no_singularity
+
+This has been done without singularity during the analysis of WGS (so no WES here, either) data.
+
+```bash
+#!/usr/bin/bash
+
+#SBATCH --job-name=_rva
+#SBATCH --account=CARDIO-SL0-CPU
+#SBATCH --partition=cardio
+#SBATCH --cpus-per-task=9
+#SBATCH --qos=cardio
+#SBATCH --array=1-368
+#SBATCH --mem=28800
+#SBATCH --time=5-00:00:00
+#SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
+#SBATCH --error=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.e
+#SBATCH --export ALL
+
+export TMPDIR=${HPC_WORK}/work
+export SEQ=~/COVID-19/SCALLOP-Seq
+export COHORT=INTERVAL
+
+no_singularity_exec()
+{
+  if [ ! -d ${SEQ}/rva/${weswgs}-${pheno} ]; then mkdir -p ${SEQ}/rva/${weswgs}-${pheno}; fi
+  Rscript ${SEQ}/burden_testing/step2 --cohort-name ${COHORT} \
+                                      --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
+                                      --group-file ${SEQ}/${group_file} \
+                                      --matrix-prefix ${SEQ}/work/${weswgs} \
+                                      --matrix-type GCTA \
+                                      --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
+                                      --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
+                                      --threads 9
+}
+
+export groups=(exon_CADD exon_reg exon_severe reg_Only)
+for weswgs in wgs
+do
+  export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+  export weswgs=${weswgs}
+  for chrs in {1..22}
+  do
+    export chr=chr${chrs}
+    for group in ${groups[@]}
+    do
+      export group_file=${group}-${chrs}.groupfile.txt
+      echo ${pheno} ${weswgs} ${chr} ${group}
+      no_singularity_exec
+    done
+  done
+done
+```
