@@ -4,7 +4,7 @@ nav:
   - INTERVAL: INTERVAL.md
   - NOTES: NOTES.md
   - Tests:
-    - tests/rva.md
+    - tests/looping.md
     - tests/no_singularity.md
     - tests/cmp.md
 theme:
