@@ -1,8 +1,3 @@
-# No singularity
-
-This is an experiment done without singularity during the analysis of WGS (so no WES here, either) data.
-
-```bash
 #!/usr/bin/bash
 
 #SBATCH --job-name=_rva
@@ -50,4 +45,3 @@ do
     done
   done
 done
-```
