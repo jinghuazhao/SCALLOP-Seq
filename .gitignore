@@ -18,7 +18,6 @@ geneset_data/scores/
 geneset_data/vep/
 high_dimensional_data
 idmap.log
-no_singularity.sb
 olink_proteomics
 omicsMap.csv
 raw_results
