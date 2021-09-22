@@ -5,7 +5,7 @@
 #SBATCH --partition=cardio
 #SBATCH --cpus-per-task=9
 #SBATCH --qos=cardio
-#SBATCH --array=5-119
+#SBATCH --array=1-368
 #SBATCH --mem=28800
 #SBATCH --time=3-00:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
