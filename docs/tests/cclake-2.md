@@ -1,10 +1,15 @@
+# cclake-2
+
+This shows allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) for two groupings both in SLURM and singularity.
+
+```bash
 #!/usr/bin/bash
 
 #SBATCH --job-name=_rva
 #SBATCH --account=PETERS-SL3-CPU
 #SBATCH --partition=cclake-himem
 #SBATCH --cpus-per-task=56
-#SBATCH --array=120-368
+#SBATCH --array=20-368
 #SBATCH --time=12:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
 #SBATCH --error=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.e
@@ -35,12 +40,12 @@ singularity_exec()
                                 --threads 56
 }
 
-export groups=(exon_CADD exon_reg exon_severe reg_Only)
+export groups=(exon_severe reg_Only)
 for weswgs in wgs
 do
   export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
   export weswgs=${weswgs}
-  for chrs in {1..22}
+  for chrs in {11..22}
   do
     export chr=chr${chrs}
     for group in ${groups[@]}
@@ -51,3 +56,4 @@ do
     done
   done
 done
+```
