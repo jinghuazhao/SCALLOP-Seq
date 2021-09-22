@@ -3,7 +3,7 @@
 #SBATCH --job-name=_rva
 #SBATCH --account=PETERS-SL3-CPU
 #SBATCH --partition=cclake-himem
-#SBATCH --cpus-per-task=30
+#SBATCH --cpus-per-task=50
 #SBATCH --array=120-368
 #SBATCH --time=12:00:00
 #SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
@@ -32,7 +32,7 @@ singularity_exec()
                                 --matrix-type GCTA \
                                 --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
                                 --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
-                                --threads 30
+                                --threads 50
 }
 
 export groups=(exon_CADD exon_reg exon_severe reg_Only)
