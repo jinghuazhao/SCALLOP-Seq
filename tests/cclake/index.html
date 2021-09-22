@@ -5,14 +5,14 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="../img/favicon.ico" rel="shortcut icon"/>
-<title>NOTES - SCALLOP-Seq</title>
-<link href="../css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../css/font-awesome.min.css" rel="stylesheet"/>
-<link href="../css/base.css" rel="stylesheet"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>cclake - SCALLOP-Seq</title>
+<link href="../../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../../css/font-awesome.min.css" rel="stylesheet"/>
+<link href="../../css/base.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet"/>
-<script defer="" src="../js/jquery-1.10.2.min.js"></script>
-<script defer="" src="../js/bootstrap.min.js"></script>
+<script defer="" src="../../js/jquery-1.10.2.min.js"></script>
+<script defer="" src="../../js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/HTML.min.js"></script>
@@ -28,7 +28,7 @@
 <body>
 <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
-<a class="navbar-brand" href="..">SCALLOP-Seq</a>
+<a class="navbar-brand" href="../..">SCALLOP-Seq</a>
 <!-- Expander button -->
 <button class="navbar-toggler" data-target="#navbar-collapse" data-toggle="collapse" type="button">
 <span class="navbar-toggler-icon"></span>
@@ -38,28 +38,28 @@
 <!-- Main navigation -->
 <ul class="nav navbar-nav">
 <li class="navitem">
-<a class="nav-link" href="..">General information</a>
+<a class="nav-link" href="../..">General information</a>
 </li>
 <li class="navitem">
-<a class="nav-link" href="../INTERVAL/">INTERVAL</a>
+<a class="nav-link" href="../../INTERVAL/">INTERVAL</a>
 </li>
-<li class="navitem active">
-<a class="nav-link" href="./">NOTES</a>
+<li class="navitem">
+<a class="nav-link" href="../../NOTES/">NOTES</a>
 </li>
-<li class="dropdown">
+<li class="dropdown active">
 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Tests <b class="caret"></b></a>
 <ul class="dropdown-menu">
 <li>
-<a class="dropdown-item" href="../tests/looping/">Looping</a>
+<a class="dropdown-item" href="../looping/">Looping</a>
 </li>
 <li>
-<a class="dropdown-item" href="../tests/no_singularity/">No singularity</a>
+<a class="dropdown-item" href="../no_singularity/">No singularity</a>
 </li>
 <li>
-<a class="dropdown-item" href="../tests/cclake/">cclake</a>
+<a class="dropdown-item active" href="./">cclake</a>
 </li>
 <li>
-<a class="dropdown-item" href="../tests/cmp/">cmp</a>
+<a class="dropdown-item" href="../cmp/">cmp</a>
 </li>
 </ul>
 </li>
@@ -71,12 +71,12 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../INTERVAL/" rel="prev">
+<a class="nav-link" href="../no_singularity/" rel="prev">
 <i class="fa fa-arrow-left"></i> Previous
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../tests/looping/" rel="next">
+<a class="nav-link" href="../cmp/" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -94,54 +94,70 @@
 </div>
 <div class="navbar-collapse collapse card bg-secondary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-level="1"><a class="nav-link" href="#notes">NOTES</a>
+<li class="nav-item" data-level="1"><a class="nav-link" href="#cclake">cclake</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#installation">Installation</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#debugging">Debugging</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#urls">URLs</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="notes">NOTES</h1>
-<h2 id="installation">Installation</h2>
-<pre><code class="language-bash">singularity pull -F library://hmgu-itg/default/burden_testing:latest
-singularity inspect burden_testing_latest.sif | \
-grep Version
-singularity exec burden_testing_latest.sif help
-singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
-singularity exec burden_testing_latest.sif prepare-regions -h
-singularity exec burden_testing_latest.sif make-group-file -h
-singularity exec --containall burden_testing_latest.sif step2 --help
-</code></pre>
-<p>for the latest or <code>:1.5.3</code>, see wiki instructions on <a href="https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation">installation</a>, <a href="https://github.com/hmgu-itg/burden_testing/wiki/Data-input">data</a> and <a href="https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT">SMMAT</a>.</p>
-<h2 id="debugging">Debugging</h2>
-<p>Additional information can be obtained with <code>singularity exec --help</code>. For debugging, e.g., on VCF2GDS, one can invoke the singularity shell via</p>
-<pre><code class="language-bash">singularity shell --bind ${PWD} --containall --shell /usr/bin/bash burden_testing_latest.sif
-</code></pre>
-<p>and the container has its own HOME directory within which <code>~</code> is recognised.</p>
-<ol>
-<li>The embedded call to <code>sbatch</code> implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
-<li>The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
-<li>The group filess for rare variant analysis have been provided by the central analysis team. Note that
-   (<strong>a</strong>). They are whole-genome so are preferably split by chromosome.
-   (<strong>b</strong>). No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.</li>
-</ol>
-<h2 id="urls">URLs</h2>
-<ul>
-<li><a href="https://sylabs.io/">Sylabs</a> (<a href="https://github.com/sylabs">GitHub</a>)</li>
-</ul></div>
+<h1 id="cclake">cclake</h1>
+<p>This is worth recording since it shows allocation of CPUs both in SLURM and singularity thread. Meanwhile, it may just be called directly.</p>
+<pre><code class="language-bash">#!/usr/bin/bash
+
+#SBATCH --job-name=_rva
+#SBATCH --account=PETERS-SL3-CPU
+#SBATCH --partition=cclake-himem
+#SBATCH --cpus-per-task=30
+#SBATCH --array=120-368
+#SBATCH --time=12:00:00
+#SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
+#SBATCH --error=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.e
+#SBATCH --export ALL
+
+export TMPDIR=${HPC_WORK}/work
+export SEQ=~/COVID-19/SCALLOP-Seq
+export COHORT=INTERVAL
+
+singularity_exec()
+{
+  if [ ! -d ${SEQ}/rva/${weswgs}-${pheno} ]; then mkdir -p ${SEQ}/rva/${weswgs}-${pheno}; fi
+  singularity exec --env SEQ=${SEQ} \
+                   --env COHORT=${COHORT} \
+                   --env weswgs=${weswgs} \
+                   --env chr=${chr} \
+                   --env group_file=${group_file} \
+                   --env pheno=${pheno} \
+                   --bind ${SEQ} --workdir ${TMPDIR} \
+                   --containall ${SEQ}/burden_testing_latest.sif step2 \
+                                --cohort-name ${COHORT} \
+                                --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
+                                --group-file ${SEQ}/${group_file} \
+                                --matrix-prefix ${SEQ}/work/${weswgs} \
+                                --matrix-type GCTA \
+                                --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
+                                --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
+                                --threads 30
+}
+
+export groups=(exon_CADD exon_reg exon_severe reg_Only)
+for weswgs in wgs
+do
+  export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+  export weswgs=${weswgs}
+  for chrs in {1..22}
+  do
+    export chr=chr${chrs}
+    for group in ${groups[@]}
+    do
+      export group_file=${group}-${chrs}.groupfile.txt
+      echo ${pheno} ${weswgs} ${chr} ${group}
+      singularity_exec
+    done
+  done
+done
+</code></pre></div>
 </div>
 </div>
 <footer class="col-md-12">
@@ -149,14 +165,14 @@ singularity exec --containall burden_testing_latest.sif step2 --help
 <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
 </footer>
 <script>
-            var base_url = "..",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-<script defer="" src="../js/base.js"></script>
-<script defer="" src="../javascripts/config.js"></script>
+<script defer="" src="../../js/base.js"></script>
+<script defer="" src="../../javascripts/config.js"></script>
 <script defer="" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script defer="" src="../search/main.js"></script>
+<script defer="" src="../../search/main.js"></script>
 <div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
