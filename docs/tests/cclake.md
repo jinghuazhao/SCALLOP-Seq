@@ -1,6 +1,6 @@
 # cclake
 
-This is worth recording since it shows allocation of CPUs both in SLURM and singularity. Meanwhile, it may just be called directly.
+This shows allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) both in SLURM and singularity.
 
 ```bash
 #!/usr/bin/bash
