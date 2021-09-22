@@ -1,6 +1,6 @@
 # cclake
 
-This is worth recording since it shows allocation of CPUs both in SLURM and singularity thread. Meanwhile, it may just be called directly.
+This is worth recording since it shows allocation of CPUs both in SLURM and singularity. Meanwhile, it may just be called directly.
 
 ```bash
 #!/usr/bin/bash
