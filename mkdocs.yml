@@ -6,7 +6,8 @@ nav:
   - Tests:
     - tests/looping.md
     - tests/no_singularity.md
-    - tests/cclake.md
+    - tests/cclake-1.md
+    - tests/cclake-2.md
     - tests/cmp.md
 theme:
     name: mkdocs
