@@ -109,11 +109,11 @@
 <li>both in SLURM and singularity.</li>
 </ul>
 <pre><code class="language-bash">export groups=(exon_CADD exon_reg exon_severe reg_Only)
-for group in {0..3}
+for group in {1..4}
 do 
   awk '/usr\/bin\/bash/,0' cclake.md | \
   sed '$d' | \
-  sed "s/group_placeholder/${groups[$group]}/" &gt; cclake-$(expr ${group} + 1).sb 
+  sed "s/group_placeholder/${groups[$(expr ${group} - 1)]}/" &gt; cclake-${group}.sb 
 done
 </code></pre>
 <pre><code class="language-bash">#!/usr/bin/bash
