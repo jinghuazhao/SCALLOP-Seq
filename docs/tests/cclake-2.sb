@@ -35,7 +35,7 @@ singularity_exec()
                                 --threads 56
 }
 
-export groups=(exon_severe reg_Only)
+export groups=(exon_reg)
 for weswgs in wgs
 do
   export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')

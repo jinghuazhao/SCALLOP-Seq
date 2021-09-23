@@ -1,6 +1,6 @@
-# cclake-1
+# cclake-3
 
-Allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) for group 1 both in SLURM and singularity.
+Allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) for group 3 both in SLURM and singularity.
 
 ```bash
 #!/usr/bin/bash
@@ -40,7 +40,7 @@ singularity_exec()
                                 --threads 56
 }
 
-export groups=(exon_CADD)
+export groups=(exon_severe)
 for weswgs in wgs
 do
   export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
