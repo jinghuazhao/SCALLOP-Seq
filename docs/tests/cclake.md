@@ -1,6 +1,6 @@
 # cclake
 
-The SLURM script for specific groups are generated from **this** file such that,
+The SLURM script for specific groups 1-4 are generated from **this** file such that,
 
 * allocation of CPUs based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes.
 * both in SLURM and singularity.
