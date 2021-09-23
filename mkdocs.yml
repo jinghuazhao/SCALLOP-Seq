@@ -8,6 +8,8 @@ nav:
     - tests/no_singularity.md
     - tests/cclake-1.md
     - tests/cclake-2.md
+    - tests/cclake-3.md
+    - tests/cclake-4.md
     - tests/cmp.md
 theme:
     name: mkdocs
