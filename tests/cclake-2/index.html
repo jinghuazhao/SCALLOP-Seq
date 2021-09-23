@@ -62,6 +62,12 @@
 <a class="dropdown-item active" href="./">cclake-2</a>
 </li>
 <li>
+<a class="dropdown-item" href="../cclake-3/">cclake-3</a>
+</li>
+<li>
+<a class="dropdown-item" href="../cclake-4/">cclake-4</a>
+</li>
+<li>
 <a class="dropdown-item" href="../cmp/">cmp</a>
 </li>
 </ul>
@@ -79,7 +85,7 @@
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../cmp/" rel="next">
+<a class="nav-link" href="../cclake-3/" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -106,7 +112,7 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="cclake-2">cclake-2</h1>
-<p>This shows allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) for two groupings both in SLURM and singularity.</p>
+<p>Allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) for group 2 both in SLURM and singularity.</p>
 <pre><code class="language-bash">#!/usr/bin/bash
 
 #SBATCH --job-name=_rva
@@ -144,12 +150,12 @@ singularity_exec()
                                 --threads 56
 }
 
-export groups=(exon_severe reg_Only)
+export groups=(exon_reg)
 for weswgs in wgs
 do
   export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
   export weswgs=${weswgs}
-  for chrs in {11..22}
+  for chrs in {1..22}
   do
     export chr=chr${chrs}
     for group in ${groups[@]}
