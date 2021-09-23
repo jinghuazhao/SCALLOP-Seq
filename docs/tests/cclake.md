@@ -7,11 +7,11 @@ The SLURM script for specific groups are generated from **this** file such that,
 
 ```bash
 export groups=(exon_CADD exon_reg exon_severe reg_Only)
-for group in {0..3}
+for group in {1..4}
 do 
   awk '/usr\/bin\/bash/,0' cclake.md | \
   sed '$d' | \
-  sed "s/group_placeholder/${groups[$group]}/" > cclake-$(expr ${group} + 1).sb 
+  sed "s/group_placeholder/${groups[$(expr ${group} - 1)]}/" > cclake-${group}.sb 
 done
 ```
 

@@ -23,16 +23,16 @@ singularity_exec()
                    --env chr=${chr} \
                    --env group_file=${group_file} \
                    --env pheno=${pheno} \
-                   --bind ${SEQ} --workdir ${TMPDIR} \
-                   --containall ${SEQ}/burden_testing_latest.sif step2 \
-                                --cohort-name ${COHORT} \
-                                --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
-                                --group-file ${SEQ}/${group_file} \
-                                --matrix-prefix ${SEQ}/work/${weswgs} \
-                                --matrix-type GCTA \
-                                --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
-                                --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
-                                --threads 56
+                   --bind ${SEQ} --workdir ${TMPDIR} --containall \
+              ${SEQ}/burden_testing_latest.sif step2 \
+                   --cohort-name ${COHORT} \
+                   --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
+                   --group-file ${SEQ}/${group_file} \
+                   --matrix-prefix ${SEQ}/work/${weswgs} \
+                   --matrix-type GCTA \
+                   --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
+                   --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
+                   --threads 56
 }
 
 export groups=(reg_Only)
