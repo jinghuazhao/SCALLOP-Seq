@@ -1,6 +1,18 @@
-# cclake-1
+# cclake
 
-Allocation of CPUs (based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes) for group 1 both in SLURM and singularity.
+The SLURM script for specific groups are generated from **this** file such that,
+
+* allocation of CPUs based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes.
+* both in SLURM and singularity.
+
+```bash
+export groups=(exon_CADD exon_reg exon_severe reg_Only)
+for group in {0..3}
+do 
+  awk '/usr\/bin\/bash/,0' cclake.md | \
+  sed "s/group_placeholder/${groups[$group]}/" > cclake-$(expr ${group} + 1).sb 
+done
+```
 
 ```bash
 #!/usr/bin/bash
@@ -40,7 +52,7 @@ singularity_exec()
                                 --threads 56
 }
 
-export groups=(exon_CADD)
+export groups=(group_placeholder)
 for weswgs in wgs
 do
   export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
@@ -56,4 +68,3 @@ do
     done
   done
 done
-```
