@@ -10,6 +10,7 @@ export groups=(exon_CADD exon_reg exon_severe reg_Only)
 for group in {0..3}
 do 
   awk '/usr\/bin\/bash/,0' cclake.md | \
+  sed '$d' | \
   sed "s/group_placeholder/${groups[$group]}/" > cclake-$(expr ${group} + 1).sb 
 done
 ```
@@ -68,3 +69,4 @@ do
     done
   done
 done
+```
