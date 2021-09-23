@@ -98,46 +98,6 @@
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#usrbinbash">!/usr/bin/bash</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-job-name_rva">SBATCH --job-name=_rva</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-accountpeters-sl3-cpu">SBATCH --account=PETERS-SL3-CPU</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-partitioncclake-himem">SBATCH --partition=cclake-himem</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-cpus-per-task56">SBATCH --cpus-per-task=56</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-array20-368">SBATCH --array=20-368</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-time120000">SBATCH --time=12:00:00</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-outputrdsuserjhz22hpc-workworkrvaa_ao">SBATCH --output=/rds/user/jhz22/hpc-work/work/rva%A_%a.o</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-errorrdsuserjhz22hpc-workworkrvaa_ae">SBATCH --error=/rds/user/jhz22/hpc-work/work/rva%A_%a.e</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="1"><a class="nav-link" href="#sbatch-export-all">SBATCH --export ALL</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </div>
 </div></div>
@@ -152,59 +112,64 @@
 for group in {0..3}
 do 
   awk '/usr\/bin\/bash/,0' cclake.md | \
+  sed '$d' | \
   sed "s/group_placeholder/${groups[$group]}/" &gt; cclake-$(expr ${group} + 1).sb 
 done
 </code></pre>
-<p>```bash</p>
-<h1 id="usrbinbash">!/usr/bin/bash</h1>
-<h1 id="sbatch-job-name_rva">SBATCH --job-name=_rva</h1>
-<h1 id="sbatch-accountpeters-sl3-cpu">SBATCH --account=PETERS-SL3-CPU</h1>
-<h1 id="sbatch-partitioncclake-himem">SBATCH --partition=cclake-himem</h1>
-<h1 id="sbatch-cpus-per-task56">SBATCH --cpus-per-task=56</h1>
-<h1 id="sbatch-array20-368">SBATCH --array=20-368</h1>
-<h1 id="sbatch-time120000">SBATCH --time=12:00:00</h1>
-<h1 id="sbatch-outputrdsuserjhz22hpc-workworkrvaa_ao">SBATCH --output=/rds/user/jhz22/hpc-work/work/<em>rva</em>%A_%a.o</h1>
-<h1 id="sbatch-errorrdsuserjhz22hpc-workworkrvaa_ae">SBATCH --error=/rds/user/jhz22/hpc-work/work/<em>rva</em>%A_%a.e</h1>
-<h1 id="sbatch-export-all">SBATCH --export ALL</h1>
-<p>export TMPDIR=${HPC_WORK}/work
+<pre><code class="language-bash">#!/usr/bin/bash
+
+#SBATCH --job-name=_rva
+#SBATCH --account=PETERS-SL3-CPU
+#SBATCH --partition=cclake-himem
+#SBATCH --cpus-per-task=56
+#SBATCH --array=20-368
+#SBATCH --time=12:00:00
+#SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
+#SBATCH --error=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.e
+#SBATCH --export ALL
+
+export TMPDIR=${HPC_WORK}/work
 export SEQ=~/COVID-19/SCALLOP-Seq
-export COHORT=INTERVAL</p>
-<p>singularity_exec()
+export COHORT=INTERVAL
+
+singularity_exec()
 {
-  if [ ! -d <span class="arithmatex" weswgs="weswgs">\({SEQ}/rva/\)</span>-<span class="arithmatex" pheno="pheno">\({pheno} ]; then mkdir -p <span class="arithmatex" weswgs="weswgs">\({SEQ}/rva/\)</span>-\)</span>; fi
-  singularity exec --env SEQ=<span class="arithmatex" cohort="COHORT">\({SEQ} \
-                   --env COHORT=\)</span> \
-                   --env weswgs=<span chr="chr" class="arithmatex">\({weswgs} \
-                   --env chr=\)</span> \
-                   --env group_file=<span class="arithmatex" pheno="pheno">\({group_file} \
-                   --env pheno=\)</span> \
-                   --bind <span class="arithmatex" cohort="COHORT">\({SEQ} --workdir <span class="arithmatex" pheno="pheno">({TMPDIR} \
-                   --containall <span class="arithmatex" pheno="pheno">({SEQ}/burden_testing_latest.sif step2 \
-                                --cohort-name <span chr="chr" class="arithmatex">({COHORT} \
-                                --GDS <span class="arithmatex" weswgs="weswgs">\({SEQ}/work/\)</span>-\)</span>.gds \
-                                --group-file <span class="arithmatex" group_file="group_file">\({SEQ}/\)</span> \
-                                --matrix-prefix <span class="arithmatex" weswgs="weswgs">\({SEQ}/work/\)</span> \
+  if [ ! -d ${SEQ}/rva/${weswgs}-${pheno} ]; then mkdir -p ${SEQ}/rva/${weswgs}-${pheno}; fi
+  singularity exec --env SEQ=${SEQ} \
+                   --env COHORT=${COHORT} \
+                   --env weswgs=${weswgs} \
+                   --env chr=${chr} \
+                   --env group_file=${group_file} \
+                   --env pheno=${pheno} \
+                   --bind ${SEQ} --workdir ${TMPDIR} \
+                   --containall ${SEQ}/burden_testing_latest.sif step2 \
+                                --cohort-name ${COHORT} \
+                                --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
+                                --group-file ${SEQ}/${group_file} \
+                                --matrix-prefix ${SEQ}/work/${weswgs} \
                                 --matrix-type GCTA \
-                                --pheno <span class="arithmatex" weswgs="weswgs">\({SEQ}/work/\)</span>/\)</span>-lr.pheno \
-                                --out <span class="arithmatex" weswgs="weswgs">\({SEQ}/rva/\)</span>-\)</span>/\)</span>-<span class="arithmatex" pheno="pheno">\({weswgs}-\)</span>-<span chr="chr" class="arithmatex">\({group}-\)</span> \
+                                --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
+                                --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
                                 --threads 56
-}</p>
-<p>export groups=(group_placeholder)
+}
+
+export groups=(group_placeholder)
 for weswgs in wgs
 do
-  export pheno=<span class="arithmatex" weswgs="weswgs">\((ls <span class="arithmatex" weswgs="weswgs">\({SEQ}/work/\)</span>/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
-  export weswgs=\)</span>
+  export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
+  export weswgs=${weswgs}
   for chrs in {1..22}
   do
-    export chr=chr<span chrs="chrs" class="arithmatex">\({chrs}
-    for group in <span class="arithmatex" group="group">\({groups[@]}
+    export chr=chr${chrs}
+    for group in ${groups[@]}
     do
-      export group_file=\)</span>-\)</span>.groupfile.txt
+      export group_file=${group}-${chrs}.groupfile.txt
       echo ${pheno} ${weswgs} ${chr} ${group}
       singularity_exec
     done
   done
-done</p></div>
+done
+</code></pre></div>
 </div>
 </div>
 <footer class="col-md-12">
