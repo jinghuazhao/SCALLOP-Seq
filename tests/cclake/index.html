@@ -96,6 +96,14 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-level="1"><a class="nav-link" href="#cclake">cclake</a>
 <ul class="nav flex-column">
+<li class="nav-item" data-level="2"><a class="nav-link" href="#setup">Setup</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#slurm-scripts">SLURM scripts</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -103,6 +111,7 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="cclake">cclake</h1>
+<h2 id="setup">Setup</h2>
 <p>The SLURM script for specific groups 1-4 are generated from <strong>this</strong> file such that,</p>
 <ul>
 <li>allocation of CPUs based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes.</li>
@@ -116,6 +125,7 @@ do
   sed "s/group_placeholder/${groups[$(expr ${group} - 1)]}/" &gt; cclake-${group}.sb 
 done
 </code></pre>
+<h2 id="slurm-scripts">SLURM scripts</h2>
 <pre><code class="language-bash">#!/usr/bin/bash
 
 #SBATCH --job-name=_rva
