@@ -2,6 +2,8 @@
 
 This is an experiment done without singularity during the analysis of WGS (so no WES here, either) data.
 
+## SLURM scripts
+
 ```bash
 #!/usr/bin/bash
 

@@ -1,5 +1,7 @@
 # cclake
 
+## Setup
+
 The SLURM script for specific groups 1-4 are generated from **this** file such that,
 
 * allocation of CPUs based on the lowest common multiple of 32 and 56 as whole numbers of 448 SL3 cclake nodes.
@@ -14,6 +16,8 @@ do
   sed "s/group_placeholder/${groups[$(expr ${group} - 1)]}/" > cclake-${group}.sb 
 done
 ```
+
+## SLURM scripts
 
 ```bash
 #!/usr/bin/bash
