@@ -6,7 +6,7 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>No singularity - SCALLOP-Seq</title>
+<title>scontrol - SCALLOP-Seq</title>
 <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../../css/font-awesome.min.css" rel="stylesheet"/>
 <link href="../../css/base.css" rel="stylesheet"/>
@@ -53,13 +53,13 @@
 <a class="dropdown-item" href="../looping/">Looping</a>
 </li>
 <li>
-<a class="dropdown-item active" href="./">No singularity</a>
+<a class="dropdown-item" href="../no_singularity/">No singularity</a>
 </li>
 <li>
 <a class="dropdown-item" href="../cclake/">cclake</a>
 </li>
 <li>
-<a class="dropdown-item" href="../scontrol/">scontrol</a>
+<a class="dropdown-item active" href="./">scontrol</a>
 </li>
 <li>
 <a class="dropdown-item" href="../cmp/">cmp</a>
@@ -74,12 +74,12 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../looping/" rel="prev">
+<a class="nav-link" href="../cclake/" rel="prev">
 <i class="fa fa-arrow-left"></i> Previous
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../cclake/" rel="next">
+<a class="nav-link" href="../cmp/" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -97,69 +97,19 @@
 </div>
 <div class="navbar-collapse collapse card bg-secondary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-level="1"><a class="nav-link" href="#no-singularity">No singularity</a>
+<li class="nav-item" data-level="1"><a class="nav-link" href="#scontrol">scontrol</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#slurm-scripts">SLURM scripts</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="no-singularity">No singularity</h1>
-<p>This is an experiment done without singularity during the analysis of WGS (so no WES here, either) data.</p>
-<h2 id="slurm-scripts">SLURM scripts</h2>
-<pre><code class="language-bash">#!/usr/bin/bash
-
-#SBATCH --job-name=_rva
-#SBATCH --account=CARDIO-SL0-CPU
-#SBATCH --partition=cardio
-#SBATCH --cpus-per-task=9
-#SBATCH --qos=cardio
-#SBATCH --array=1-368
-#SBATCH --mem=28800
-#SBATCH --time=5-00:00:00
-#SBATCH --output=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.o
-#SBATCH --error=/rds/user/jhz22/hpc-work/work/_rva_%A_%a.e
-#SBATCH --export ALL
-
-export TMPDIR=${HPC_WORK}/work
-export SEQ=~/COVID-19/SCALLOP-Seq
-export COHORT=INTERVAL
-
-no_singularity_exec()
-{
-  if [ ! -d ${SEQ}/rva/${weswgs}-${pheno} ]; then mkdir -p ${SEQ}/rva/${weswgs}-${pheno}; fi
-  Rscript ${SEQ}/burden_testing/step2 --cohort-name ${COHORT} \
-                                      --GDS ${SEQ}/work/${weswgs}-${chr}.gds \
-                                      --group-file ${SEQ}/${group_file} \
-                                      --matrix-prefix ${SEQ}/work/${weswgs} \
-                                      --matrix-type GCTA \
-                                      --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
-                                      --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
-                                      --threads 9
-}
-
-export groups=(exon_CADD exon_reg exon_severe reg_Only)
-for weswgs in wgs
-do
-  export pheno=$(ls ${SEQ}/work/${weswgs}/*-lr.pheno | xargs -I {} basename {} -lr.pheno | awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]')
-  export weswgs=${weswgs}
-  for chrs in {1..22}
-  do
-    export chr=chr${chrs}
-    for group in ${groups[@]}
-    do
-      export group_file=${group}-${chrs}.groupfile.txt
-      echo ${pheno} ${weswgs} ${chr} ${group}
-      no_singularity_exec
-    done
-  done
-done
-</code></pre></div>
+<h1 id="scontrol">scontrol</h1>
+<p>The <code>exon_reg</code> group is particularly slow and we attempted to hold it with</p>
+<pre><code class="language-bash">scontrol hold 46817784_[29-368]
+</code></pre>
+<p>the array indexes were necessary since _22 was already done.</p></div>
 </div>
 </div>
 <footer class="col-md-12">
