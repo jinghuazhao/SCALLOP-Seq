@@ -5,15 +5,14 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="None" name="description"/>
-<link href="img/favicon.ico" rel="shortcut icon"/>
-<title>SCALLOP-Seq</title>
-<link href="css/bootstrap.min.css" rel="stylesheet"/>
-<link href="css/font-awesome.min.css" rel="stylesheet"/>
-<link href="css/base.css" rel="stylesheet"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Miscellaneous utilities - SCALLOP-Seq</title>
+<link href="../../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../../css/font-awesome.min.css" rel="stylesheet"/>
+<link href="../../css/base.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet"/>
-<script defer="" src="js/jquery-1.10.2.min.js"></script>
-<script defer="" src="js/bootstrap.min.js"></script>
+<script defer="" src="../../js/jquery-1.10.2.min.js"></script>
+<script defer="" src="../../js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Bash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/HTML.min.js"></script>
@@ -26,10 +25,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </head>
-<body class="homepage">
+<body>
 <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
-<a class="navbar-brand" href=".">SCALLOP-Seq</a>
+<a class="navbar-brand" href="../..">SCALLOP-Seq</a>
 <!-- Expander button -->
 <button class="navbar-toggler" data-target="#navbar-collapse" data-toggle="collapse" type="button">
 <span class="navbar-toggler-icon"></span>
@@ -38,35 +37,35 @@
 <div class="navbar-collapse collapse" id="navbar-collapse">
 <!-- Main navigation -->
 <ul class="nav navbar-nav">
-<li class="navitem active">
-<a class="nav-link" href=".">General information</a>
+<li class="navitem">
+<a class="nav-link" href="../..">General information</a>
 </li>
 <li class="navitem">
-<a class="nav-link" href="INTERVAL/">INTERVAL</a>
+<a class="nav-link" href="../../INTERVAL/">INTERVAL</a>
 </li>
 <li class="navitem">
-<a class="nav-link" href="NOTES/">NOTES</a>
+<a class="nav-link" href="../../NOTES/">NOTES</a>
 </li>
-<li class="dropdown">
+<li class="dropdown active">
 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Tests <b class="caret"></b></a>
 <ul class="dropdown-menu">
 <li>
-<a class="dropdown-item" href="tests/looping/">Looping</a>
+<a class="dropdown-item" href="../looping/">Looping</a>
 </li>
 <li>
-<a class="dropdown-item" href="tests/no_singularity/">No singularity</a>
+<a class="dropdown-item" href="../no_singularity/">No singularity</a>
 </li>
 <li>
-<a class="dropdown-item" href="tests/cclake/">cclake</a>
+<a class="dropdown-item" href="../cclake/">cclake</a>
 </li>
 <li>
-<a class="dropdown-item" href="tests/scontrol/">scontrol</a>
+<a class="dropdown-item" href="../scontrol/">scontrol</a>
 </li>
 <li>
-<a class="dropdown-item" href="tests/cmp/">cmp</a>
+<a class="dropdown-item" href="../cmp/">cmp</a>
 </li>
 <li>
-<a class="dropdown-item" href="tests/misc/">Miscellaneous utilities</a>
+<a class="dropdown-item active" href="./">Miscellaneous utilities</a>
 </li>
 </ul>
 </li>
@@ -78,12 +77,12 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link disabled" rel="prev">
+<a class="nav-link" href="../cmp/" rel="prev">
 <i class="fa fa-arrow-left"></i> Previous
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="INTERVAL/" rel="next">
+<a class="nav-link disabled" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -101,17 +100,9 @@
 </div>
 <div class="navbar-collapse collapse card bg-secondary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-level="1"><a class="nav-link" href="#scallop-seq-meta-analysis">SCALLOP-Seq meta-analysis</a>
+<li class="nav-item" data-level="1"><a class="nav-link" href="#miscellaneous-utilities">Miscellaneous utilities</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#consortium-contacts">Consortium contacts</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#slack-channel">Slack channel</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#urls">URLs</a>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#rm">rm</a>
 <ul class="nav flex-column">
 </ul>
 </li>
@@ -121,25 +112,11 @@
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="scallop-seq-meta-analysis">SCALLOP-Seq meta-analysis</h1>
-<h2 id="consortium-contacts">Consortium contacts</h2>
-<ul>
-<li>Arthur Gilly</li>
-<li>Grace Png</li>
-<li>Young-Chan Park</li>
-</ul>
-<h2 id="slack-channel">Slack channel</h2>
-<ul>
-<li><a href="https://scallop-seq.slack.com">https://scallop-seq.slack.com</a></li>
-</ul>
-<h2 id="urls">URLs</h2>
-<ul>
-<li><a href="https://github.com/hmgu-itg/burden_testing">https://github.com/hmgu-itg/burden_testing</a></li>
-<li><a href="https://sites.google.com/site/jpopgen/dbNSFP">https://sites.google.com/site/jpopgen/dbNSFP</a></li>
-<li><a href="https://sites.google.com/site/jpopgen/wgsa">https://sites.google.com/site/jpopgen/wgsa</a></li>
-<li><a href="http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/">http://web.corral.tacc.utexas.edu/WGSAdownload/resources/precomputed_hg38/</a></li>
-<li><a href="http://www.columbia.edu/~ii2135/Eigen_functions_112015.R">http://www.columbia.edu/~ii2135/Eigen_functions_112015.R</a></li>
-</ul></div>
+<h1 id="miscellaneous-utilities">Miscellaneous utilities</h1>
+<h2 id="rm">rm</h2>
+<p>This is to remove nonactive (NR&gt;5) empty directories,</p>
+<pre><code class="language-bash">ls -t | awk 'NR&gt;5' | parallel -C' ' 'rmdir {}'
+</code></pre></div>
 </div>
 </div>
 <footer class="col-md-12">
@@ -147,14 +124,14 @@
 <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
 </footer>
 <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-<script defer="" src="js/base.js"></script>
-<script defer="" src="javascripts/config.js"></script>
+<script defer="" src="../../js/base.js"></script>
+<script defer="" src="../../javascripts/config.js"></script>
 <script defer="" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script defer="" src="search/main.js"></script>
+<script defer="" src="../../search/main.js"></script>
 <div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
@@ -220,7 +197,3 @@
 </div>
 </body>
 </html>
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2021-10-14 12:51:28.534310+00:00
--->
