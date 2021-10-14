@@ -17,6 +17,8 @@ do
 done
 ```
 
+Somehow the number of message lines is smaller (to the number of chromosomes) than counterpart without Singularity.
+
 ## SLURM scripts
 
 ```bash
