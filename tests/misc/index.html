@@ -59,9 +59,6 @@
 <a class="dropdown-item" href="../cclake/">cclake</a>
 </li>
 <li>
-<a class="dropdown-item" href="../scontrol/">scontrol</a>
-</li>
-<li>
 <a class="dropdown-item active" href="./">Miscellaneous utilities</a>
 </li>
 </ul>
@@ -74,7 +71,7 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../scontrol/" rel="prev">
+<a class="nav-link" href="../cclake/" rel="prev">
 <i class="fa fa-arrow-left"></i> Previous
                                 </a>
 </li>
@@ -107,6 +104,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#scontrol">scontrol</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -119,6 +120,20 @@
 <h2 id="rm">rm</h2>
 <p>This is to remove nonactive (NR&gt;5) empty directories,</p>
 <pre><code class="language-bash">ls -t | awk 'NR&gt;5' | parallel -C' ' 'rmdir {}'
+</code></pre>
+<h2 id="scontrol">scontrol</h2>
+<p>The <code>exon_reg</code> group is particularly slow (~10hr each) and we attempted to let faster groups done first and hold it with</p>
+<pre><code class="language-bash">scontrol hold 46817784_[29-368]
+</code></pre>
+<p>the array indexes were necessary since _22 was already done.</p>
+<p>We have from <code>squeue -u $USER</code></p>
+<pre><code>46817784_[29-368] cclake-hi     _rva    jhz22 PD       0:00      1 (JobHeldUser,None)
+</code></pre>
+<p>and restore the jobs with</p>
+<pre><code class="language-bash">scontrol release 46817784
+</code></pre>
+<p>to get</p>
+<pre><code>46817784_[29-368] cclake-hi     _rva    jhz22 PD       0:00      1 (Priority,QOSMaxCpuPerUserLimit)
 </code></pre></div>
 </div>
 </div>
