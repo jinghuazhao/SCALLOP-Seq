@@ -38,7 +38,7 @@
 <!-- Main navigation -->
 <ul class="nav navbar-nav">
 <li class="navitem">
-<a class="nav-link" href="../..">General information</a>
+<a class="nav-link" href="../.."></a>
 </li>
 <li class="navitem">
 <a class="nav-link" href="../../INTERVAL/">INTERVAL</a>
@@ -118,8 +118,8 @@
 <h2 id="cmp">cmp</h2>
 <p>Comparison of results is to seed from <a href="../cmp.sh">cmp.sh</a>.</p>
 <h2 id="rm">rm</h2>
-<p>This is to remove nonactive (NR&gt;5) empty directories,</p>
-<pre><code class="language-bash">ls -t | awk 'NR&gt;5' | parallel -C' ' 'rmdir {}'
+<p>This is to remove nonactive (non-Cardio, NR&gt;4) empty directories,</p>
+<pre><code class="language-bash">ls -t | awk 'NR&gt;4' | parallel -C' ' 'rmdir {}'
 </code></pre>
 <h2 id="scontrol">scontrol</h2>
 <p>The <code>exon_reg</code> group is particularly slow (~10hr each) and we attempted to let faster groups done first and hold it with</p>
