@@ -1,4 +1,4 @@
-# cclake
+# Singularity
 
 ## Setup
 
