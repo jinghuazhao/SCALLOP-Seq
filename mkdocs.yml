@@ -1,6 +1,6 @@
 site_name: SCALLOP-Seq
 nav:
-  - General information: index.md
+  - "": index.md
   - INTERVAL: INTERVAL.md
   - NOTES: NOTES.md
   - Tests:
