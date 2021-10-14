@@ -6,10 +6,10 @@ Comparison of results is to seed from [cmp.sh](cmp.sh).
 
 ## rm
 
-This is to remove nonactive (NR>5) empty directories,
+This is to remove nonactive (non-Cardio, NR>4) empty directories,
 
 ```bash
-ls -t | awk 'NR>5' | parallel -C' ' 'rmdir {}'
+ls -t | awk 'NR>4' | parallel -C' ' 'rmdir {}'
 ```
 ## scontrol
 
