@@ -125,6 +125,7 @@ do
   sed "s/group_placeholder/${groups[$(expr ${group} - 1)]}/" &gt; cclake-${group}.sb 
 done
 </code></pre>
+<p>Somehow the number of message lines is smaller (to the number of chromosomes) than counterpart without Singularity.</p>
 <h2 id="slurm-scripts">SLURM scripts</h2>
 <pre><code class="language-bash">#!/usr/bin/bash
 
