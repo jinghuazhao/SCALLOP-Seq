@@ -9,6 +9,7 @@ nav:
     - tests/cclake.md
     - tests/scontrol.md
     - tests/cmp.md
+    - tests/misc.md
 theme:
     name: mkdocs
     nav_style: dark
