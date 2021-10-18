@@ -38,3 +38,13 @@ to get
 ```
 46817784_[29-368] cclake-hi     _rva    jhz22 PD       0:00      1 (Priority,QOSMaxCpuPerUserLimit)
 ```
+
+## scancel
+
+This is appropriate since some cclake jobs were furnished with cardio.
+
+```bash
+scancel 46817784_[250-299]
+```
+
+Then they were dropped according to `scancel 46817784_[250-299]`.
