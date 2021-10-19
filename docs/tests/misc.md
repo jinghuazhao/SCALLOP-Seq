@@ -47,4 +47,4 @@ This is appropriate since some cclake jobs were furnished with cardio.
 scancel 46817784_[250-299]
 ```
 
-Then they were dropped according to `scancel 46817784_[250-299]`.
+They were then dropped according to `squeue -u $USER`.
