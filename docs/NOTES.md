@@ -12,7 +12,7 @@ singularity exec burden_testing_latest.sif prepare-regions -h
 singularity exec burden_testing_latest.sif make-group-file -h
 singularity exec --containall burden_testing_latest.sif step2 --help
 ```
-for the latest or `:1.5.3`, see wiki instructions on [installation](https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation), [data](https://github.com/hmgu-itg/burden_testing/wiki/Data-input) and [SMMAT](https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT).
+for the latest or `:1.5.4`, see wiki instructions on [installation](https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation), [data](https://github.com/hmgu-itg/burden_testing/wiki/Data-input) and [SMMAT](https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT).
 
 ## Debugging
 
