@@ -125,7 +125,7 @@ singularity exec burden_testing_latest.sif prepare-regions -h
 singularity exec burden_testing_latest.sif make-group-file -h
 singularity exec --containall burden_testing_latest.sif step2 --help
 </code></pre>
-<p>for the latest or <code>:1.5.3</code>, see wiki instructions on <a href="https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation">installation</a>, <a href="https://github.com/hmgu-itg/burden_testing/wiki/Data-input">data</a> and <a href="https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT">SMMAT</a>.</p>
+<p>for the latest or <code>:1.5.4</code>, see wiki instructions on <a href="https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation">installation</a>, <a href="https://github.com/hmgu-itg/burden_testing/wiki/Data-input">data</a> and <a href="https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT">SMMAT</a>.</p>
 <h2 id="debugging">Debugging</h2>
 <p>Additional information can be obtained with <code>singularity exec --help</code>. For debugging, e.g., on VCF2GDS, one can invoke the singularity shell via</p>
 <pre><code class="language-bash">singularity shell --bind ${PWD} --containall --shell /usr/bin/bash burden_testing_latest.sif
