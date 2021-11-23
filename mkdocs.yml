@@ -1,4 +1,6 @@
 site_name: SCALLOP-Seq
+repo_url: https://github.com/jinghuazhao/SCALLOP-Seq
+edit_uri: ""
 nav:
   - "": index.md
   - INTERVAL: INTERVAL.md
