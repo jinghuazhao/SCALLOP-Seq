@@ -18,7 +18,7 @@ export COHORT=INTERVAL
 
 singularity_exec()
 {
-  if [ ! -d ${SEQ}/rva/${weswgs}-${pheno} ]; then mkdir -p ${SEQ}/rva/${weswgs}-${pheno}; fi
+  if [ ! -d ${SEQ}/rva/${COHORT}-${weswgs}-${pheno} ]; then mkdir -p ${SEQ}/rva/${COHORT}-${weswgs}-${pheno}; fi
   singularity exec --env SEQ=${SEQ} \
                    --env COHORT=${COHORT} \
                    --env weswgs=${weswgs} \
@@ -33,7 +33,7 @@ singularity_exec()
                    --matrix-prefix ${SEQ}/work/${weswgs} \
                    --matrix-type GCTA \
                    --pheno ${SEQ}/work/${weswgs}/${pheno}-lr.pheno \
-                   --out ${SEQ}/rva/${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
+                   --out ${SEQ}/rva/${COHORT}-${weswgs}-${pheno}/${COHORT}-${weswgs}-${pheno}-${group}-${chr} \
                    --threads 9
 }
 
