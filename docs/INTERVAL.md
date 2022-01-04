@@ -63,7 +63,7 @@ function gene()
     for grouping in exon_CADD exon_reg exon_severe reg_Only
     do
       echo ${grouping}
-      cat <(head -1 ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1) \
+      cat <(head -1 ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1 | cut -f1,2,9-15) \
           <(sed '1d' ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1 | cut -f1,2,9-15 | awk '$5<1e-5' | grep -v NA)
     done
   done
