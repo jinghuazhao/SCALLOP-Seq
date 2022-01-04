@@ -18,6 +18,57 @@ setup ==> 1; 1 ==> 2;
     2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
+### Comparison with alternative methods
+
+```bash
+#!/usr/bin/bash
+
+function extract()
+{
+  export olink=~/rds/projects/olink_proteomics/scallop
+  for g in wes wgs
+  do
+    export IL6A=${olink}/SCALLOP-Seq/work/spa/${g}-cvd3_IL.6RA__P08887.fastGWA.gz
+    cat <(gunzip -c ${IL6A} | head -1) <(gunzip -c ${IL6A} | awk '$1==1 && $10<5e-8' | sort -k1,1n -k3,3n) >> sanger.txt
+  done
+}
+
+Rscript -e '
+  options(width=200)
+  library(dplyr)
+  sanger <- read.table("sanger.txt",header=TRUE,sep="\t",nrows=11) %>%
+            rename(chrpos_grch38=locus..GRCh38.,rsid=rsid..dbSNP_v153,F=AF_original,b=beta,se=standard_error,p=p_value) %>%
+            select(chrpos_grch38,REF,ALT,AF,b,se,p)
+  wes <- read.table("sanger.txt",header=TRUE,skip=12,nrows=11) %>%
+         mutate(chrpos_grch38=paste0("chr",CHR,":",POS)) %>%
+         select(chrpos_grch38,BETA,SE,P) %>%
+         rename(b_wes=BETA,se_wes=SE,p_wes=P)
+  wgs <- read.table("sanger.txt",header=TRUE,skip=24) %>%
+         mutate(chrpos_grch38=paste0("chr",CHR,":",POS)) %>%
+         rename(b_wgs=BETA,se_wgs=SE,p_wgs=P) %>%
+         select(-CHR,-POS,-INFO)
+  sanger_wes_wgs <- full_join(sanger,wes) %>% full_join(wgs,by='chrpos_grch38')
+  write.table(sanger_wes_wgs,file="sanger-wes-wgs.txt",row.names=FALSE,quote=FALSE,sep="\t")
+'
+```
+
+#### sanger.txt
+
+```
+locus (GRCh38)	rsid (dbSNP_v153	REF	ALT	AF_original	beta	standard_error	p_value	AC	AN	AF	n_HomRef	n_Het	n_HomAlt	n_pheno	phenotype	phenotype_name					
+chr1:154465420	NA	T	C	8.09E-01	5.21E-01	6.22E-02	2.69E-16	1268	1562	8.12E-01	25	244	512	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154542717	NA	C	T	2.00E-01	-5.44E-01	6.11E-02	3.89E-18	303	1556	1.95E-01	502	249	27	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154544102	rs3811448	G	A	2.01E-01	-5.43E-01	6.03E-02	1.82E-18	307	1564	1.96E-01	504	249	29	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154545028	rs3811449	G	A	2.01E-01	-5.44E-01	6.04E-02	1.68E-18	306	1564	1.96E-01	505	248	29	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154520226	NA	G	A	6.37E-01	4.77E-01	5.01E-02	1.89E-20	995	1546	6.44E-01	98	355	320	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154552497	rs12144146	A	G	3.11E-01	5.09E-01	5.19E-02	1.86E-21	509	1560	3.26E-01	345	361	74	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154470484	rs11265621	G	A	6.39E-01	4.87E-01	4.96E-02	1.79E-21	1007	1562	6.45E-01	100	355	326	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154544001	NA	G	A	3.09E-01	5.06E-01	5.13E-02	1.03E-21	509	1564	3.25E-01	350	355	77	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154429496	NA	T	C	5.65E-01	8.12E-01	4.11E-02	1.97E-70	886	1564	5.67E-01	148	382	252	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154435237	rs7521458	T	C	4.08E-01	9.86E-01	3.63E-02	2.12E-114	634	1544	4.11E-01	272	366	134	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+chr1:154454494	NA	A	C	3.98E-01	1.05E+00	3.57E-02	6.77E-128	628	1550	4.05E-01	270	382	123	782	olinkcvd3_il6ra___p08887	Interleukin-6 receptor subunit alpha (IL-6RA)					
+```
+
 ## Variant lists and results
 
 INTERVAL variant lists and results submitted centrally are detailed below..
