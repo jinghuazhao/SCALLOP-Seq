@@ -18,7 +18,7 @@ setup ==> 1; 1 ==> 2;
     2 --> 2.2; 2.2 --> wes.R; 2.2 --> wgs.R; 2.2 --> weswgs.R; 2.2 --> rva.sb; 2.2 --> prune.wrap;
 ```
 
-### Comparison with alternative methods
+### Comparison with with Burden/SKAT LoF
 
 ```bash
 #!/usr/bin/bash
