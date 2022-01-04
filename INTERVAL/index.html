@@ -191,7 +191,7 @@ function gene()
     for grouping in exon_CADD exon_reg exon_severe reg_Only
     do
       echo ${grouping}
-      cat &lt;(head -1 ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1) \
+      cat &lt;(head -1 ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1 | cut -f1,2,9-15) \
           &lt;(sed '1d' ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1 | cut -f1,2,9-15 | awk '$5&lt;1e-5' | grep -v NA)
     done
   done
