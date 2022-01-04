@@ -151,7 +151,8 @@ setup ==&gt; 1; 1 ==&gt; 2;
 <h3 id="comparison-with-alternative-methods">Comparison with alternative methods</h3>
 <pre><code class="language-bash">#!/usr/bin/bash
 
-function extract()
+function spa()
+# single point analysis
 {
   export olink=~/rds/projects/olink_proteomics/scallop
   for g in wes wgs
@@ -178,6 +179,23 @@ Rscript -e '
   sanger_wes_wgs &lt;- full_join(sanger,wes) %&gt;% full_join(wgs,by='chrpos_grch38')
   write.table(sanger_wes_wgs,file="sanger-wes-wgs.txt",row.names=FALSE,quote=FALSE,sep="\t")
 '
+
+function gene()
+# gene-based analysis
+{
+  for g in wes wgs
+  do
+    echo ${g}
+    export rva=${olink}/SCALLOP-Seq/rva
+    export IL6RA=${g}-cvd3_IL.6RA__P08887
+    for grouping in exon_CADD exon_reg exon_severe reg_Only
+    do
+      echo ${grouping}
+      cat &lt;(head -1 ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1) \
+          &lt;(sed '1d' ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1 | cut -f1,2,9-15 | awk '$5&lt;1e-5' | grep -v NA)
+    done
+  done
+}
 </code></pre>
 <h4 id="sangertxt">sanger.txt</h4>
 <pre><code>locus (GRCh38)  rsid (dbSNP_v153    REF ALT AF_original beta    standard_error  p_value AC  AN  AF  n_HomRef    n_Het   n_HomAlt    n_pheno phenotype   phenotype_name                  
