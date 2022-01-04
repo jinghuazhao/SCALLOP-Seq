@@ -23,7 +23,8 @@ setup ==> 1; 1 ==> 2;
 ```bash
 #!/usr/bin/bash
 
-function extract()
+function spa()
+# single point analysis
 {
   export olink=~/rds/projects/olink_proteomics/scallop
   for g in wes wgs
@@ -50,6 +51,23 @@ Rscript -e '
   sanger_wes_wgs <- full_join(sanger,wes) %>% full_join(wgs,by='chrpos_grch38')
   write.table(sanger_wes_wgs,file="sanger-wes-wgs.txt",row.names=FALSE,quote=FALSE,sep="\t")
 '
+
+function gene()
+# gene-based analysis
+{
+  for g in wes wgs
+  do
+    echo ${g}
+    export rva=${olink}/SCALLOP-Seq/rva
+    export IL6RA=${g}-cvd3_IL.6RA__P08887
+    for grouping in exon_CADD exon_reg exon_severe reg_Only
+    do
+      echo ${grouping}
+      cat <(head -1 ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1) \
+          <(sed '1d' ${rva}/${IL6RA}/INTERVAL-${IL6RA}-${grouping}-chr1 | cut -f1,2,9-15 | awk '$5<1e-5' | grep -v NA)
+    done
+  done
+}
 ```
 
 #### sanger.txt
