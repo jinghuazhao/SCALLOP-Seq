@@ -30,6 +30,23 @@ and the container has its own HOME directory within which `~` is recognised.
    (**a**). They are whole-genome so are preferably split by chromosome.
    (**b**). No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.
 
+## File upload
+
+The usual sftp wrapped by lftp utility is considerably faster.
+
+```bash
+export HOST=
+export USER=
+export PASS=
+
+lftp -u ${USER},${PASS} sftp://${HOST} <<EOF
+cd genetic_data/for_Grace;
+lcd /rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva;
+mirror --parallel=15 --continue --reverse --log=sftp.log --verbose;
+bye;
+EOF
+```
+
 ## URLs
 
 * [Sylabs](https://sylabs.io/) ([GitHub](https://github.com/sylabs))
