@@ -107,6 +107,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#file-upload">File upload</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 <li class="nav-item" data-level="2"><a class="nav-link" href="#urls">URLs</a>
 <ul class="nav flex-column">
 </ul>
@@ -141,6 +145,19 @@ singularity exec --containall burden_testing_latest.sif step2 --help
    (<strong>a</strong>). They are whole-genome so are preferably split by chromosome.
    (<strong>b</strong>). No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.</li>
 </ol>
+<h2 id="file-upload">File upload</h2>
+<p>The usual sftp wrapped by lftp utility is considerably faster.</p>
+<pre><code class="language-bash">export HOST=
+export USER=
+export PASS=
+
+lftp -u ${USER},${PASS} sftp://${HOST} &lt;&lt;EOF
+cd genetic_data/for_Grace;
+lcd /rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva;
+mirror --parallel=15 --continue --reverse --log=sftp.log --verbose;
+bye;
+EOF
+</code></pre>
 <h2 id="urls">URLs</h2>
 <ul>
 <li><a href="https://sylabs.io/">Sylabs</a> (<a href="https://github.com/sylabs">GitHub</a>)</li>
