@@ -146,15 +146,16 @@ singularity exec --containall burden_testing_latest.sif step2 --help
    (<strong>b</strong>). No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.</li>
 </ol>
 <h2 id="file-upload">File upload</h2>
+<p>This is a heavy burden for the system, so the files are compressed first with <code>sftp.sb</code>.</p>
 <p>The usual sftp wrapped by lftp utility is considerably faster.</p>
 <pre><code class="language-bash">export HOST=
 export USER=
 export PASS=
 
 lftp -u ${USER},${PASS} sftp://${HOST} &lt;&lt;EOF
-cd genetic_data/for_Grace;
+cd genetic_data/for_Grace/compressed;
 lcd /rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva;
-mirror --parallel=15 --continue --reverse --log=sftp.log --verbose;
+mirror --parallel=20 --continue --reverse --log=sftp.log --verbose;
 bye;
 EOF
 </code></pre>
