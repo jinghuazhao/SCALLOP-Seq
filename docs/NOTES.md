@@ -32,6 +32,8 @@ and the container has its own HOME directory within which `~` is recognised.
 
 ## File upload
 
+This is a heavy burden for the system, so the files are compressed first with `sftp.sb`.
+
 The usual sftp wrapped by lftp utility is considerably faster.
 
 ```bash
@@ -40,9 +42,9 @@ export USER=
 export PASS=
 
 lftp -u ${USER},${PASS} sftp://${HOST} <<EOF
-cd genetic_data/for_Grace;
+cd genetic_data/for_Grace/compressed;
 lcd /rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva;
-mirror --parallel=15 --continue --reverse --log=sftp.log --verbose;
+mirror --parallel=20 --continue --reverse --log=sftp.log --verbose;
 bye;
 EOF
 ```

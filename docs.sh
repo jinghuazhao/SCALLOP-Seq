@@ -19,6 +19,8 @@ git add bgen.sb spa.* prune.wrap rva.* geneset_data/config.txt
 git commit -m "SCALLOP-seq association analysis"
 git add docs docs.sh
 git commit -m "docs"
+git add sftp.sb
+git commit -m "uploading results"
 git add mkdocs.yml
 git commit -m "mkdocs.yml"
 git push
