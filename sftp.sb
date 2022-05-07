@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+#SBATCH --account=PETERS-SL3-CPU
+#SBATCH --partition=cclake-himem
+#SBATCH --array=1-734
+#SBATCH --job-name=_gzip
+#SBATCH --mem=6840
+#SBATCH --time=12:00:00
+#SBATCH --output=/rds/user/jhz22/hpc-work/work/_gzip_%A_%a.o
+#SBATCH --error=/rds/user/jhz22/hpc-work/work/_gzip_%A_%a.e
+
+
+export TMPDIR=${HPC_WORK}/work
+export SCALLOP_Seq=~/COVID-19/SCALLOP-Seq
+export dirname=$(awk 'NR==ENVIRON["SLURM_ARRAY_TASK_ID"]{print $1}' ${SCALLOP_Seq}/sftp.lst)
+
+function compress()
+{
+  cd ${SCALLOP_Seq}/rva/${dirname}
+  ls | grep -v .gz  | xargs -l -I {} bash -c 'gzip -f {}'
+}
+
+compress
