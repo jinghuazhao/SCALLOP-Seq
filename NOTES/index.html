@@ -124,8 +124,7 @@
 <h1 id="notes">NOTES</h1>
 <h2 id="installation">Installation</h2>
 <pre><code class="language-bash">singularity pull -F library://hmgu-itg/default/burden_testing:latest
-singularity inspect burden_testing_latest.sif | \
-grep Version
+singularity inspect burden_testing_latest.sif
 singularity exec burden_testing_latest.sif help
 singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
 singularity exec burden_testing_latest.sif prepare-regions -h
