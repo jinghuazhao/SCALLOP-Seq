@@ -111,6 +111,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#file-download">File download</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 <li class="nav-item" data-level="2"><a class="nav-link" href="#urls">URLs</a>
 <ul class="nav flex-column">
 </ul>
@@ -153,6 +157,15 @@ export PASS=
 
 export RVA=/rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva
 lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c -P=20 -R -v ${RVA}"
+</code></pre>
+<h2 id="file-download">File download</h2>
+<p>We simply drop "-R" from above to have,</p>
+<pre><code class="language-bash">export HOST=
+export USER=
+export PASS=
+
+export RVA=/rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva
+lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c -P=20 -v ${RVA}"
 </code></pre>
 <h2 id="urls">URLs</h2>
 <ul>
