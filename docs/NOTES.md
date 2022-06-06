@@ -44,6 +44,19 @@ export RVA=/rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLO
 lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c -P=20 -R -v ${RVA}"
 ```
 
+## File download
+
+We simply drop "-R" from above to have,
+
+```bash
+export HOST=
+export USER=
+export PASS=
+
+export RVA=/rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva
+lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c -P=20 -v ${RVA}"
+```
+
 ## URLs
 
 * [Sylabs](https://sylabs.io/) ([GitHub](https://github.com/sylabs))
