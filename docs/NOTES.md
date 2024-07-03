@@ -31,7 +31,7 @@ and the container has its own HOME directory within which `~` is recognised.
 
 ## File upload
 
-This is a heavy burden for the system, so the files are compressed first with `sftp.sb`.
+This is a heavy burden for the system, so the files are compressed first with `sftp.sb`[^addons].
 
 The usual sftp wrapped by lftp utility is considerably faster.
 
@@ -60,3 +60,34 @@ lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c 
 ## URLs
 
 * [Sylabs](https://sylabs.io/) ([GitHub](https://github.com/sylabs))
+
+---
+
+[^addons]: Add-ons
+
+This is used to add some incomplete files.
+
+```bash
+#!/usr/bin/bash
+
+cat addons/*txt | \
+parallel -C' ' 'echo {} | sed "s/INTERVAL-//;s/-/\t/g" | awk -vf={} "{print \$1\"-\"\$2\"/\" f}"' | \
+parallel -C' ' -j10 'cp -r {} addons'
+cp -r wgs-cvd2_IgG.Fc.receptor.II.b__P31994 addons
+```
+
+where we have
+
+```
+==> addons/INTERVAL.cvd2.corruptedfiles.txt <==
+INTERVAL-wgs-cvd2_MMP.12__P39900-reg_Only-chr21.var.28.gz
+INTERVAL-wgs-cvd2_MMP.12__P39900-reg_Only-chr21.var.47.gz
+
+==> addons/INTERVAL.cvd3.corruptedfiles.txt <==
+INTERVAL-wgs-cvd3_PGLYRP1__O75594-reg_Only-chr10.score.50.gz
+INTERVAL-wgs-cvd3_PGLYRP1__O75594-reg_Only-chr10.score.51.gz
+
+==> addons/missing.txt <==
+INTERVAL-wgs-cvd2_DCN__P07585-exon_reg-chr4.gz
+INTERVAL-wgs-cvd2_CXCL1__P09341-exon_reg-chr5.gz
+```
