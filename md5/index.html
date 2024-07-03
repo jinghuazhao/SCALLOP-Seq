@@ -119,7 +119,7 @@ gunzip -c weswgs.txt.gz | parallel -j8 -C' ' 'md5sum {}*' &gt; weswgs.md5
 <li>wes.md5.gz</li>
 <li>wgs-0.gz, wgs-1.gz</li>
 </ul>
-<p>for WES and WGS results, respectively. Optionally, a <code>wgs.md5.gz</code> can be obtained from <code>zcat wgs-{0..1}.gz | gzip -f &gt; wgs.m5.gz</code>.</p></div>
+<p>for WES and WGS results, respectively. Optionally, as shown in <a href="../split.sh"><code>split.sh</code></a> a <code>wgs.md5.gz</code> can be obtained from <code>zcat wgs-{0..1}.gz | gzip -f &gt; wgs.m5.gz</code>.</p></div>
 </div>
 </div>
 <footer class="col-md-12">
