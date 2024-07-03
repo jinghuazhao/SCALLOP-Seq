@@ -7,7 +7,7 @@ The md5sum file is obtained from [`weswgs.sh`](weswgs.sh),
 
 export PERL5LIB=
 ls | grep -e 'wes-' -e 'wgs-' | parallel -C' ' 'ls {}*' | gzip -f > weswgs.txt.gz
-gunzip -c weswgs.txt.gz | parallel -j8 -C' ' 'md5sum {}*' > weswgs.md5
+gunzip -c weswgs.txt.gz | parallel -j8 -C' ' 'md5sum {}*' | gzip -f > weswgs.md5
 ```
 
 The `weswgs.md5.gz` file is ~87MB which is well above the 50MB threshold for GitHub so it is available as follows,
