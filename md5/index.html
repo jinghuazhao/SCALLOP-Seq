@@ -6,7 +6,7 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../img/favicon.ico" rel="shortcut icon"/>
-<title>NOTES - SCALLOP-Seq</title>
+<title>md5 - SCALLOP-Seq</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/font-awesome.min.css" rel="stylesheet"/>
 <link href="../css/base.css" rel="stylesheet"/>
@@ -41,11 +41,11 @@
 <li class="navitem">
 <a class="nav-link" href="../INTERVAL/">INTERVAL</a>
 </li>
-<li class="navitem active">
-<a class="nav-link" href="./">NOTES</a>
-</li>
 <li class="navitem">
-<a class="nav-link" href="../md5/">md5</a>
+<a class="nav-link" href="../NOTES/">NOTES</a>
+</li>
+<li class="navitem active">
+<a class="nav-link" href="./">md5</a>
 </li>
 <li class="dropdown">
 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Tests <b class="caret"></b></a>
@@ -72,12 +72,12 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../INTERVAL/" rel="prev">
+<a class="nav-link" href="../NOTES/" rel="prev">
 <i class="fa fa-arrow-left"></i> Previous
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../md5/" rel="next">
+<a class="nav-link" href="../tests/looping/" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -98,102 +98,28 @@
 </div>
 <div class="navbar-collapse collapse card bg-secondary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-level="1"><a class="nav-link" href="#notes">NOTES</a>
+<li class="nav-item" data-level="1"><a class="nav-link" href="#md5">md5</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#installation">Installation</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#debugging">Debugging</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#file-upload">File upload</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#file-download">File download</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#urls">URLs</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="notes">NOTES</h1>
-<h2 id="installation">Installation</h2>
-<pre><code class="language-bash">singularity pull -F library://hmgu-itg/default/burden_testing:latest
-singularity inspect burden_testing_latest.sif
-singularity exec burden_testing_latest.sif help
-singularity exec burden_testing_latest.sif single_cohort_munge_variantlist -h
-singularity exec burden_testing_latest.sif prepare-regions -h
-singularity exec burden_testing_latest.sif make-group-file -h
-singularity exec --containall burden_testing_latest.sif step2 --help
-</code></pre>
-<p>for the latest or <code>:1.5.4</code>, see wiki instructions on <a href="https://github.com/hmgu-itg/burden_testing/wiki/Prerequisites-and-installation">installation</a>, <a href="https://github.com/hmgu-itg/burden_testing/wiki/Data-input">data</a> and <a href="https://github.com/hmgu-itg/burden_testing/wiki/Single-cohort-analysis-using-SMMAT">SMMAT</a>.</p>
-<h2 id="debugging">Debugging</h2>
-<p>Additional information can be obtained with <code>singularity exec --help</code>. For debugging, e.g., on VCF2GDS, one can invoke the singularity shell via</p>
-<pre><code class="language-bash">singularity shell --bind ${PWD} --containall --shell /usr/bin/bash burden_testing_latest.sif
-</code></pre>
-<p>and the container has its own HOME directory within which <code>~</code> is recognised.</p>
-<ol>
-<li>The embedded call to <code>sbatch</code> implicates the <code>--wait</code> option as the succeeding steps would require its full results.</li>
-<li>The array jobs could be altered to accommodate software and model (BOLT-LMM, GCTA <code>--fastGWA/fastGWAS-lr</code> for mixed model/linear regression).</li>
-<li>The group filess for rare variant analysis have been provided by the central analysis team. Note that
-   (<strong>a</strong>). They are whole-genome so are preferably split by chromosome.
-   (<strong>b</strong>). No groupings are contained for chromosomes X and Y, so they could be dropped from the analysis.</li>
-</ol>
-<h2 id="file-upload">File upload</h2>
-<p>This is a heavy burden for the system, so the files are compressed first with <code>sftp.sb</code><a href="Add-ons">^addons</a>.</p>
-<p>The usual sftp wrapped by lftp utility is considerably faster.</p>
-<pre><code class="language-bash">export HOST=
-export USER=
-export PASS=
-
-export RVA=/rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva
-lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c -P=20 -R -v ${RVA}"
-</code></pre>
-<h2 id="file-download">File download</h2>
-<p>We simply drop "-R" from above to have,</p>
-<pre><code class="language-bash">export HOST=
-export USER=
-export PASS=
-
-export RVA=/rds/project/jmmh2/rds-jmmh2-projects/olink_proteomics/scallop/SCALLOP-Seq/rva
-lftp -c "open sftp://${USER}:${PASS}@${HOST}:/genetic_data/for_Grace; mirror -c -P=20 -v ${RVA}"
-</code></pre>
-<h2 id="urls">URLs</h2>
-<ul>
-<li><a href="https://sylabs.io/">Sylabs</a> (<a href="https://github.com/sylabs">GitHub</a>)</li>
-</ul>
-<hr/>
-<p>This is used to add some incomplete files.</p>
+<h1 id="md5">md5</h1>
+<p>The md6sum file is obtained from <a href="../weswgs.sh"><code>weswgs.sh</code></a>,</p>
 <pre><code class="language-bash">#!/usr/bin/bash
 
-cat addons/*txt | \
-parallel -C' ' 'echo {} | sed "s/INTERVAL-//;s/-/\t/g" | awk -vf={} "{print \$1\"-\"\$2\"/\" f}"' | \
-parallel -C' ' -j10 'cp -r {} addons'
-cp -r wgs-cvd2_IgG.Fc.receptor.II.b__P31994 addons
+export PERL5LIB=
+ls | grep -e 'wes-' -e 'wgs-' | parallel -C' ' 'ls {}*' | gzip -f &gt; weswgs.txt.gz
+gunzip -c weswgs.txt.gz | parallel -j8 -C' ' 'md5sum {}*' &gt; weswgs.md5
 </code></pre>
-<p>where we have</p>
-<pre><code>==&gt; addons/INTERVAL.cvd2.corruptedfiles.txt &lt;==
-INTERVAL-wgs-cvd2_MMP.12__P39900-reg_Only-chr21.var.28.gz
-INTERVAL-wgs-cvd2_MMP.12__P39900-reg_Only-chr21.var.47.gz
-
-==&gt; addons/INTERVAL.cvd3.corruptedfiles.txt &lt;==
-INTERVAL-wgs-cvd3_PGLYRP1__O75594-reg_Only-chr10.score.50.gz
-INTERVAL-wgs-cvd3_PGLYRP1__O75594-reg_Only-chr10.score.51.gz
-
-==&gt; addons/missing.txt &lt;==
-INTERVAL-wgs-cvd2_DCN__P07585-exon_reg-chr4.gz
-INTERVAL-wgs-cvd2_CXCL1__P09341-exon_reg-chr5.gz
-</code></pre></div>
+<p>The <code>weswgs.md5.gz</code> file is ~87MB which is well above the 50MB threshold for GitHub so it is available as follows,</p>
+<ul>
+<li>wes.md5.gz</li>
+<li>wgs-0.gz, wgs-1.gz</li>
+</ul>
+<p>for WES and WGS results, respectively. Optionally, a <code>wgs.md5.gz</code> can be obtained from <code>zcat wgs-{0..1}.gz | gzip -f &gt; wgs.m5.gz</code>.</p></div>
 </div>
 </div>
 <footer class="col-md-12">
