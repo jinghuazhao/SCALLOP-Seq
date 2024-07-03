@@ -15,4 +15,4 @@ The `weswgs.md5.gz` file is ~87MB which is well above the 50MB threshold for Git
 - wes.md5.gz
 - wgs-0.gz, wgs-1.gz
 
-for WES and WGS results, respectively. Optionally, a `wgs.md5.gz` can be obtained from `zcat wgs-{0..1}.gz | gzip -f > wgs.m5.gz`.
+for WES and WGS results, respectively. Optionally, as shown in [`split.sh`](split.sh) a `wgs.md5.gz` can be obtained from `zcat wgs-{0..1}.gz | gzip -f > wgs.m5.gz`.
