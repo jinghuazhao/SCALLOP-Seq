@@ -1,6 +1,6 @@
 # md5
 
-The md6sum file is obtained from [`weswgs.sh`](weswgs.sh),
+The md5sum file is obtained from [`weswgs.sh`](weswgs.sh),
 
 ```bash
 #!/usr/bin/bash
