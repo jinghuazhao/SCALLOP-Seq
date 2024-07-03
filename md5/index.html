@@ -112,7 +112,7 @@
 
 export PERL5LIB=
 ls | grep -e 'wes-' -e 'wgs-' | parallel -C' ' 'ls {}*' | gzip -f &gt; weswgs.txt.gz
-gunzip -c weswgs.txt.gz | parallel -j8 -C' ' 'md5sum {}*' | gzip -f &gt; weswgs.md5
+gunzip -c weswgs.txt.gz | parallel -j8 -C' ' 'md5sum {}*' | gzip -f &gt; weswgs.md5.gz
 </code></pre>
 <p>The <code>weswgs.md5.gz</code> file is ~87MB which is well above the 50MB threshold for GitHub so it is available as follows,</p>
 <ul>
