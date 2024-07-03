@@ -5,6 +5,7 @@ nav:
   - "": index.md
   - INTERVAL: INTERVAL.md
   - NOTES: NOTES.md
+  - md5: md5.md
   - Tests:
     - tests/looping.md
     - tests/no_singularity.md
